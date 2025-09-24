@@ -663,7 +663,7 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
     (when (and file (string-match "\\.Rmd\\'" file))
       (shell-command
        (format "Rscript -e \"rmarkdown::render('%s')\"" file)))))
-                                                                 
+
 ;; R modes
 ;; (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))

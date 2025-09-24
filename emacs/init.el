@@ -92,7 +92,7 @@
 
 (if maximise-on-startup
         (push '(fullscreen . maximized) default-frame-alist))
-  
+
 (defalias 'ar #'align-regexp)
 
 (defun goto-matching-parenthesis (arg)
