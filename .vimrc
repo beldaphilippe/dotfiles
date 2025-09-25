@@ -3,11 +3,16 @@
 
 set nocompatible " Basic of config for vim
 
+" OPTIONS {{{
+
+let my_lsp = true " enables lsp in Vim
+
+" }}}
+
 " PLUGINS ---------------------------------------------------------------------- {{{
 
 filetype plugin indent on " For plugins to load correctly
 filetype off " Helps force plugins to load correctly when it is turned back on below
-" call plug#begin('/etc/vim/plugged')
 call plug#begin('~/.vim/plugged') " for user only
 
 Plug 'tpope/vim-sensible' " sane defaults
@@ -29,8 +34,8 @@ Plug 'honza/vim-snippets'
 "Plug 'Raimondi/delimitMate'
 
 " file explorer
-Plug 'preservim/nerdtree'
-Plug 'Nopik/vim-nerdtree-direnter'
+"Plug 'preservim/nerdtree'
+"Plug 'Nopik/vim-nerdtree-direnter'
 
 " markdown in vim
 Plug 'godlygeek/tabular'
@@ -58,29 +63,24 @@ Plug 'lervag/vimtex'
 Plug 'tikhomirov/vim-glsl'
 
 call plug#end()
+filetype on " c.f. comment above on 'filetype off'
 "}}}
 
 " KEYS MAPPINGS -------------------------------------------------- {{{
+" Move on visual lines
+nnoremap j gj
+nnoremap k gk
 
-" Pick a leader key
-let mapleader = ","
+" Remap esc in insert & visual mode & command mode
+inoremap kj <esc>
+vnoremap kj <esc>
+cnoremap kj <C-C>
 
-" substitute (cf function in COMMANDS section)
-vnoremap <C-s> :<BS><BS><BS><BS><BS>Substitute v 
-nnoremap <C-s> :Substitute n 
-"vnoremap s :<BS><BS><BS><BS><BS>VisualModeSubstitute
-"nnoremap s :NormalModeSubstitute
 
 " configure maralla/completor to use tab
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
-" remap esc in insert & visual mode
-inoremap kj <esc>
-vnoremap kj <esc>
-" remap esc in command mode
-cnoremap kj <C-C>
 
 " ultisnips default bindings compete with completor's tab
 " so we need to remap them
@@ -96,36 +96,36 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-" clear search
-map <leader><space> :noh<CR>
-
-" Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
-
-" Remap esc in insert & visual mode & command mode
-inoremap kj <esc>
-vnoremap kj <esc>
-cnoremap kj <C-C>
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
-" Formatting
-map <leader>q gqip
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
-" Or use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
-
 " opens NERDTree
 nnoremap <F2> :NERDTreeToggle<CR>
 inoremap <F2> :NERDTreeToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
+
+" LEADER KEY CONFIGURATION {{{
+
+" Pick a leader key
+let mapleader = "<space>"
+
+" Save file
+map <leader>w :w<CR>
+" Formatting
+map <leader>q gqip
+" clear search
+map <leader>/ :noh<CR>
+" Toggle to visualize tabs and EOL
+set listchars=tab:▸\ ,eol:¬
+map <leader>l :set list!<CR>
+" substitute (cf function in COMMANDS section)
+vnoremap <leader>s :<BS><BS><BS><BS><BS>Substitute v 
+nnoremap <leader>s :Substitute n 
+
+" }}}
 
 "}}}
 
