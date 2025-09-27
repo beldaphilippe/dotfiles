@@ -129,9 +129,9 @@ nnoremap <leader>s :Substitute n
 
 "}}}
 
-" COMMANDS -------------------------------------------------- {{{
+" COMMAND FUNCTIONS -------------------------------------------------- {{{
 
-" substitute
+" Substitute
 command -nargs=+ Substitute :call Substitute(<f-args>)
 function Substitute(...)
     if a:1 == 'v'
@@ -141,21 +141,7 @@ function Substitute(...)
     endif
 endfunction
 
-" Select the font for the hardcopy
-"set printfont=Courier:h8
-"set printfont=JetBrains\ Mono\ NL:h8
-"set printfont=JetBrains\ Mono\ NL,JetBrains\ Mono\ NL\ Medium:style=Regular:h8
-"set printfont="JetBrains Mono NL,JetBrains Mono NL Medium:style=Regular:h12"
-"command HardcopyPdf :hardcopy > %.ps | !ps2pdf %.ps && rm %.ps && echo 'Created: %.pdf'
-"command Printpdf :colorscheme shine<CR>zr:TOhtml>%.html<CR>:colorscheme molokai
-"command Printpdf :call AA()
-"function AA(...)
-    "colorscheme shine
-    "TOhtml>%.html
-    "colorscheme gruvbox
-"endfunction
-
-"}}}
+" }}}
 
 " STATUS LINE -------------------------------------------------- {{{
 
@@ -240,16 +226,13 @@ endfunction
 " }}}
 
 " PYTHON FILES {{{
+
 " Interpretation for Python files
 autocmd FileType python nnoremap <C-b> :w<CR>:!python3 %<CR>
 autocmd FileType python setlocal foldmethod=indent
 autocmd FileType python setlocal foldnestmax=1
 "set nofoldenable
-"autocmd FileType c,python setlocal foldenable
-"autocmd FileType c setlocal foldmethod=marker
-"autocmd FileType python setlocal foldmethod=expr
-"autocmd FileType python setlocal foldexpr=(getline(v:lnum)=~'^##')?0:((getline(v:lnum+1)=~'^##')?0:(indent(v:lnum)>0)?2:1)
-""set foldexpr=(getline(v:lnum)=~'^##')?0:1 " different display
+
 " }}}
 
 " RMARKDOWN FILES -------------------------------------------------- {{{
