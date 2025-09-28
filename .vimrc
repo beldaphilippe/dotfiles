@@ -5,7 +5,7 @@ set nocompatible " Basic of config for vim
 
 " OPTIONS {{{
 
-let my_lsp = true " enables lsp in Vim
+" let my_lsp = true " enables lsp in Vim
 
 " }}}
 
@@ -110,6 +110,7 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 " LEADER KEY CONFIGURATION {{{
 
 " Pick a leader key
+unmap <space>
 let mapleader = "<space>"
 
 " Save file
