@@ -110,7 +110,7 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 " LEADER KEY CONFIGURATION {{{
 
 " Pick a leader key
-unmap <space>
+nunmap <space>
 let mapleader = "<space>"
 
 " Save file
