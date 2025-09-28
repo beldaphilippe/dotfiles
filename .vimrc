@@ -243,9 +243,9 @@ autocmd Filetype rmd nnoremap <C-b> :w <CR> :!Rscript -e "rmarkdown::render('%')
 " GLSL FILES -------------------------------------------------- {{{
 
 autocmd FileType glsl setlocal foldmethod=syntax
-autocmd Filetype glsl nnoremap <F5> :w <CR> :!make compile SHADER_PATH=%<CR>
-autocmd Filetype glsl nnoremap <F6> :w <CR> :!make run<CR>
-autocmd Filetype glsl nnoremap <C-b> :w <CR> :!clear && make run<CR>
+autocmd Filetype glsl nnoremap <F5> :w <CR> :!make compile<CR>
+autocmd Filetype glsl nnoremap <F6> :w <CR> :!make run FRAG_SHADER_PATH=%<CR>
+autocmd Filetype glsl nnoremap <C-b> :w <CR> :!clear && make run FRAG_SHADER_PATH=%<CR>
 
 " }}}
 
