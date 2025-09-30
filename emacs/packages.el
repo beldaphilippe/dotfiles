@@ -576,9 +576,9 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
 (use-package glsl-mode
   :ensure t
   :bind (:map glsl-mode-map
-              ("<f5>" . (lambda () (interactive) (my/make-compile nil nil)))
+              ("<f5>"   . (lambda () (interactive) (my/make-compile nil nil)))
               ("<S-f5>" . (lambda () (interactive) (my/make-compile nil t)))
-              ("<f6>" . my/make-run (format "SHADER_PATH=%s" buffer-file-name) nil)
+              ("<f6>"   . (lambda () (interactive) (my/make-run (format "SHADER_PATH=%s" buffer-file-name) nil)))
               ("<S-f6>" . (lambda () (interactive) (my/make-run t))))
   :mode ("\\.\\(frag\\|vert\\)\\'" . glsl-mode))
 
