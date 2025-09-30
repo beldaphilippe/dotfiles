@@ -579,7 +579,7 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
               ("<f5>"   . (lambda () (interactive) (my/make-compile nil nil)))
               ("<S-f5>" . (lambda () (interactive) (my/make-compile nil t)))
               ("<f6>"   . (lambda () (interactive) (my/make-run (format "SHADER_PATH=%s" buffer-file-name) nil)))
-              ("<S-f6>" . (lambda () (interactive) (my/make-run t))))
+              ("<S-f6>" . (lambda () (interactive) (my/make-run (format "SHADER_PATH=%s" buffer-file-name) t))))
   :mode ("\\.\\(frag\\|vert\\)\\'" . glsl-mode))
 
 ;; (add-to-list 'auto-mode-alist '("\\.[Rr]md\\'" . markdown-mode))
