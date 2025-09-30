@@ -502,7 +502,6 @@ in the root directory of the project and optionally opens a shell buffer to disp
 If DISPLAY is non-nil, opens the shell buffer in the right half of the current buffer."
   (interactive "sCompile option: \nP")
   (let* ((root (project-root (project-current)))
-         (filename (buffer-file-name))
          (buf-name (format "*%s-shell*" (file-name-nondirectory (directory-file-name (file-name-directory root)))))
          (shell-buffer (get-buffer-create buf-name))
          (current-win (selected-window)))
@@ -532,12 +531,11 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
         (message "Buffer file compiled.")
         ))))
 
-(defun my/make-run (&optional display)
-  "Calls `make run' if a makefile exists in the root directory
-of the project and optionally opens a shell buffer to display the results.
+(defun my/make-run (&optional compile-option display)
+  "Call `make run COMPILE-OPTION' if a makefile exists in the root directory of the project and optionally opens a shell buffer to display the results.
 
 If DISPLAY is non-nil, opens the shell buffer in the right half of the current buffer."
-  (interactive "P")
+  (interactive "sCompile option: \nP")
   (let* ((root (project-root (project-current)))
          (buf-name (format "*%s-shell*" (file-name-nondirectory (directory-file-name (file-name-directory root)))))
          (shell-buffer (get-buffer-create buf-name))
@@ -554,17 +552,19 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
       (with-current-buffer shell-buffer
         (let ((proc (get-buffer-process shell-buffer)))
           (when proc
-            (comint-send-string proc "make run\n")
+            (comint-send-string proc (format "make run %s\n" (or compile-option "")))
             (goto-char (point-max)))))
 
       ;; Display buffer if display is non-nil
-      (when display
+      (if display
         (let ((win (display-buffer
                     shell-buffer
                     '((display-buffer-reuse-window
                        display-buffer-at-bottom)
                       (window-height . 0.3)))))
-          (select-window current-win))))))
+          (select-window current-win))
+        (message "Buffer file ran.")
+        ))))
 
 (with-eval-after-load 'cc-mode
   (define-key c-mode-map (kbd "<f5>") #'my/make-compile)
@@ -576,9 +576,9 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
 (use-package glsl-mode
   :ensure t
   :bind (:map glsl-mode-map
-              ("<f5>" . (lambda () (interactive) (my/make-compile (format "SHADER_PATH=%s" buffer-file-name) nil)))
-              ("<S-f5>" . (lambda () (interactive) (my/make-compile (format "SHADER_PATH=%s" buffer-file-name) t)))
-              ("<f6>" . my/make-run)
+              ("<f5>" . (lambda () (interactive) (my/make-compile nil nil)))
+              ("<S-f5>" . (lambda () (interactive) (my/make-compile nil t)))
+              ("<f6>" . my/make-run (format "SHADER_PATH=%s" buffer-file-name) nil)
               ("<S-f6>" . (lambda () (interactive) (my/make-run t))))
   :mode ("\\.\\(frag\\|vert\\)\\'" . glsl-mode))
 
