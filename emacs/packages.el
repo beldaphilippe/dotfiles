@@ -547,7 +547,7 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
         (message "Buffer file compiled.")
         ))))
 
-(defun my/make-run (&optional compile-option display)
+(defun my/make-run (&optional compile-option display nix-shell)
   "Call `make run COMPILE-OPTION' if a makefile exists in the root directory of the project and optionally opens a shell buffer to display the results.
 
 If DISPLAY is non-nil, opens the shell buffer in the right half of the current buffer."
@@ -591,7 +591,7 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
   (define-key c++-mode-map (kbd "<f5>") #'my/make-compile)
   (define-key c++-mode-map (kbd "<f6>") #'my/make-run))
 
-;; for GSLS, compile and run functions
+;; for GLSL, compile and run functions
 (use-package glsl-mode
   :ensure t
   :bind (:map glsl-mode-map
