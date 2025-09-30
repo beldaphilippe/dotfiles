@@ -494,8 +494,21 @@
   (condition-case nil (imenu-add-to-menubar "Navigation") (error nil)))
 (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
+
+(defun my/run-nix-develop (shell-buffer nix-shell-name)
+  "Run 'nix develop NIX-SHELL-NAME' in the given SHELL-BUFFER.
+NIX-SHELL-NAME should be a valid flake reference like 'shaders'."
+  (when (and (buffer-live-p shell-buffer)
+             (comint-check-proc shell-buffer))
+    (with-current-buffer shell-buffer
+      (let ((proc (get-buffer-process shell-buffer)))
+        (when proc
+          (comint-send-string proc (format "nix develop ~/my-nixos-config#%s\n" nix-shell-name))
+          (goto-char (point-max)))))))
+
+
 ;; for C and C++, compile and run functions
-(defun my/make-compile (&optional compile-option display)
+(defun my/make-compile (&optional compile-option display nix-shell)
   "Call `make compile COMPILE-OPTION' if a makefile exists
 in the root directory of the project and optionally opens a shell buffer to display the results.
 
@@ -511,7 +524,10 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
       (unless (comint-check-proc shell-buffer)
         (with-current-buffer shell-buffer
           (let ((default-directory root))
-            (shell shell-buffer))))
+            (shell shell-buffer))
+          ;; Run nix develop
+          (when nix-shell
+            (my/run-nix-develop shell-buffer nix-shell))))
 
       ;; Run command
       (with-current-buffer shell-buffer
@@ -546,7 +562,10 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
       (unless (comint-check-proc shell-buffer)
         (with-current-buffer shell-buffer
           (let ((default-directory root))
-            (shell shell-buffer))))
+            (shell shell-buffer))
+          ;; Run nix develop
+          (when nix-shell
+            (my/run-nix-develop shell-buffer nix-shell))))
 
       ;; Run command
       (with-current-buffer shell-buffer
@@ -576,10 +595,10 @@ If DISPLAY is non-nil, opens the shell buffer in the right half of the current b
 (use-package glsl-mode
   :ensure t
   :bind (:map glsl-mode-map
-              ("<f5>"   . (lambda () (interactive) (my/make-compile nil nil)))
-              ("<S-f5>" . (lambda () (interactive) (my/make-compile nil t)))
-              ("<f6>"   . (lambda () (interactive) (my/make-run (format "SHADER_PATH=%s" buffer-file-name) nil)))
-              ("<S-f6>" . (lambda () (interactive) (my/make-run (format "SHADER_PATH=%s" buffer-file-name) t))))
+              ("<f5>"   . (lambda () (interactive) (my/make-compile nil nil "shaders")))
+              ("<S-f5>" . (lambda () (interactive) (my/make-compile nil t   "shaders")))
+              ("<f6>"   . (lambda () (interactive) (my/make-run (format "FRAG_SHADER_PATH=%s" buffer-file-name) nil "shaders")))
+              ("<S-f6>" . (lambda () (interactive) (my/make-run (format "FRAG_SHADER_PATH=%s" buffer-file-name) t   "shaders"))))
   :mode ("\\.\\(frag\\|vert\\)\\'" . glsl-mode))
 
 ;; (add-to-list 'auto-mode-alist '("\\.[Rr]md\\'" . markdown-mode))
