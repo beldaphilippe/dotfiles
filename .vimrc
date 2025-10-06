@@ -116,7 +116,7 @@ let mapleader=" "
 " Save file
 map <leader>w :w<CR>
 " Formatting
-map <leader>q gqip
+map <leader>q :q<CR>
 " clear search
 map <leader>/ :noh<CR>
 " Toggle to visualize tabs and EOL
