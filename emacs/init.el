@@ -47,10 +47,10 @@
 (defvar my-backup-dir (expand-file-name "backups/" user-emacs-directory))
 (defvar my-autosave-dir (expand-file-name "autosaves/" user-emacs-directory))
 ;; Create the directories if they don't exist
-(make-directory my-backup-dir t)
-(make-directory my-autosave-dir t)
+(unless (file-exists-p my-backup-dir) (make-directory my-backup-dir t))
+(unless (file-exists-p my-autosave-dir) (make-directory my-autosave-dir t))
 ;; Configure Emacs to use them
-(setq backup-directory-alist `(("." . ,my-backup-dir)))
+(setq backup-directory-alist `((".*" . ,my-backup-dir)))
 (setq auto-save-file-name-transforms `((".*" ,my-autosave-dir t)))
 
 ;; Align with spaces only
