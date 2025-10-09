@@ -250,6 +250,12 @@ autocmd Filetype glsl nnoremap <C-b> :w <CR> :!clear && make run FRAG_SHADER_PAT
 
 " }}}
 
+" JAVA FILES -------------------------------------------------- {{{
+
+autocmd FileType java setlocal foldmethod=syntax
+
+" }}}
+
 " }}}
 
 set number " Show line numbers
