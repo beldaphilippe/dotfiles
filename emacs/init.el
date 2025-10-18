@@ -20,25 +20,25 @@
 ;; setq-default sets values only in buffers that do not have their own local values for the variable.
 
 (setq-default ;; Interface
-      recent-files-on-startup               t       ;; open a buffer with the recent files on startup
-      maximise-on-startup                   nil     ;; maximize emacs when it starts
-      truncate-partial-width-windows        nil     ;; ???
-      display-graphic-p                     t     ;; for icons
+      recent-files-on-startup               t        ;; open a buffer with the recent files on startup
+      maximise-on-startup                   nil      ;; maximize emacs when it starts
+      truncate-partial-width-windows        nil      ;; ???
+      display-graphic-p                     t        ;; for icons
       ring-bell-function                    t
-      visible-bell                          t       ;; the screen blinks when you make an error
-      vim-bindings                          nil     ;; enables vim bindings thanks to evil
-      warning-minimum-level                 :error  ;; info level for the warning buffer to be popped
+      visible-bell                          t        ;; the screen blinks when you make an error
+      vim-bindings                          nil      ;; enables vim bindings thanks to evil
+      warning-minimum-level                 :error   ;; info level for the warning buffer to be popped
       completion-ignore-case                t
       read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case    t
       mouse-yank-at-point                   t
-      indent-tabs-mode                      nil     ;; indent with tabs
-;      tab-width                                    4       ;; default indent width
-      c-basic-offset                        4       ;; tab width for c
+      indent-tabs-mode                      nil      ;; indent with tabs
+      ;; tab-width                             4        ;; default indent width
+      c-basic-offset                        4        ;; tab width for c
 
-      ;; external utilities
+                                                     ;; external utilities
       browse-url-generic-program                "xdg-open" ;; open URLs in the default web browser (not EWW) using XDG's utilace
-          )
+      )
 
 ;; load all packages (lazy load for most)
 (load (expand-file-name "packages.el" user-emacs-directory))
@@ -52,6 +52,9 @@
 ;; Configure Emacs to use them
 (setq backup-directory-alist `((".*" . ,my-backup-dir)))
 (setq auto-save-file-name-transforms `((".*" ,my-autosave-dir t)))
+
+;; to edit gpg files, password asker
+(setq epa-pinentry-mode 'loopbak)
 
 ;; Align with spaces only
 (defadvice align-regexp (around align-regexp-with-spaces)
