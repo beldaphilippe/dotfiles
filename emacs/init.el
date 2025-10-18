@@ -54,7 +54,7 @@
 (setq auto-save-file-name-transforms `((".*" ,my-autosave-dir t)))
 
 ;; to edit gpg files, password asker
-(setq epa-pinentry-mode 'loopbak)
+(setq epa-pinentry-mode 'loopback)
 
 ;; Align with spaces only
 (defadvice align-regexp (around align-regexp-with-spaces)
