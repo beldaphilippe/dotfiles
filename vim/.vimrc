@@ -62,6 +62,9 @@ Plug 'lervag/vimtex'
 " GLSL
 Plug 'tikhomirov/vim-glsl'
 
+" Gpg edition
+Plug 'jamessan/vim-gnupg'
+
 call plug#end()
 filetype on " c.f. comment above on 'filetype off'
 "}}}
