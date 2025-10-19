@@ -240,8 +240,8 @@ autocmd FileType python setlocal foldnestmax=1
 " }}}
 
 " RMARKDOWN FILES -------------------------------------------------- {{{
-" Compilation Rmd -> html
-autocmd Filetype rmd nnoremap <C-b> :w <CR> :!Rscript -e "rmarkdown::render('%')" <CR>
+" Compilation Rmd -> pdf
+autocmd Filetype rmd nnoremap <C-b> :w <CR> :!Rscript -e "rmarkdown::render('%', 'pdf_document')" <CR>
 " }}}
 
 " GLSL FILES -------------------------------------------------- {{{
