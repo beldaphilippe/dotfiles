@@ -214,6 +214,7 @@
 ;; Get the name of the font thanks to M-x describe-font.
 ;; To have icons, run M-x nerd-icons-install-fonts, then install the font generated.
 
+(add-to-list 'default-frame-alist '(font . "SF Mono-14"))
 
 (cond
  ((eq system-type 'windows-nt) ; Windows

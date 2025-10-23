@@ -10,7 +10,7 @@
  ;; defer GC to shorten startup time
  '(gc-cons-threshold most-positive-fixnum)
  '(gc-cons-percentage 0.6)
- 
+
  ;; Disable startup screen
  '(inhibit-startup-screen t)
  '(inhibit-startup-message t)

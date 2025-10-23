@@ -4,7 +4,7 @@
 ;;; NB: when using use-package, we can use ":defer t" to defer the loading
 ;;; of a package, and keywords ":mode :commands :hook :bind :interpreter :bind-keymap"
 
-;;; TODO:
+;;; TODO: use tree-sitter
 
 ;;; Code:
 
@@ -309,6 +309,23 @@
 ;;   ;; (setq lsp-diagnostic-filter #'my/lsp-diagnostic-filter)
 ;;   )
 
+;(use-package lsp-mode
+;  :ensure t
+;  :defer t
+;  :init
+;  (setq lsp-keymap-prefix "C-c l")
+;  :hook ((css-mode-hook . lsp-deferred)
+;     (html-mode-hook . lsp-deferred)
+;     (web-mode-hook . lsp-deferred)
+;     (js2-mode-hook . lsp-deferred)
+;     (c++-mode-hook . lsp-deferred)
+;     (c-mode-hook . lsp-deferred)
+;     (java-mode-hook . lsp-deferred)
+;     (lsp-mode-hook . lsp-enable-which-key-integration))
+;  :commands (lsp lsp-deferred)
+;  :bind (:map lsp-mode-map
+;          ("M-<RET>" . lsp-execute-code-action)))
+
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
@@ -347,6 +364,19 @@
   (lsp-headerline-breadcrumb-icons-enable nil)
   (lsp-lens-enable nil))
 
+(use-package lsp-java
+  :ensure t
+  :defer t
+  :after lsp
+  :config
+  (setq lsp-java-format-on-type-enabled nil)
+  (defun my/java-mode-hook ()
+    (setq c-basic-offset 2
+          c-label-offset 0
+          tab-width 2
+          indent-tabs-mode nil
+      require-final-newline nil))
+  :hook (java-mode-hook . (lsp my/java-mode-hook)))
 
 ;; (use-package lsp-mode
 ;;   :ensure t
