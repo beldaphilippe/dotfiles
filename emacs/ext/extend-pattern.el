@@ -13,8 +13,9 @@
 
 (defvar-local extend-pattern-mode nil
   "Toggle extend-symbol-mode.")
-(defvar-local extend-pattern-which "==="
-  "The pattern that is extended.  The last character is repeated to fill the visual line.")
+(defvar-local extend-pattern-which "---"
+  "The pattern that is extended.
+The last character is repeated to fill the visual line.")
 (defvar-local extend-pattern-my-overlays '()
   "Contains all the overlays displaying the extended patterns.")
 
