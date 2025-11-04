@@ -1,3 +1,7 @@
+(use-package nix-ts-mode
+  :ensure t
+  :mode "\\.nix\\'")
+
 (defun my/run-nix-develop (shell-buffer nix-shell-name)
   "Run 'nix develop NIX-SHELL-NAME' in the given SHELL-BUFFER.
 NIX-SHELL-NAME should be a valid flake reference like 'shaders'."
