@@ -1,0 +1,9 @@
+*
+!.gitignore
+!ext/
+!init.el
+!init/
+!install/
+!langs/
+!README.md
+!utils/

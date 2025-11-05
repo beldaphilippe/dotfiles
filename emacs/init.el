@@ -30,5 +30,5 @@
     "langs/lisp.el"
     "langs/markdown.el"
     "langs/nix.el"
-    "langs/org.el"
+    ;"langs/org.el"
     "langs/rmd.el"))
