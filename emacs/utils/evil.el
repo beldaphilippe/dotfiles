@@ -47,7 +47,10 @@
 (use-package evil-escape
   :ensure t
   :after evil
+  :hook (evil-mode . (lambda ()
+                       (if evil-mode
+                           (evil-escape-mode 1)
+                         (evil-escape-mode -1))))
   :config
-  (evil-escape-mode 1)
   (setq-default evil-escape-key-sequence "kj"
-                evil-escape-delay        0.2))
+                evil-escape-delay 0.2))

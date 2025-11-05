@@ -118,10 +118,13 @@
           (message "File '%s' successfully renamed to '%s'"
                    name (file-name-nondirectory new-name)))))))
 
-;; syntax checking : errors and warnings
+;; syntax checking : errors and warnings ---
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+
+;; tabs ---
+(setq-default indent-tabs-mode nil)
 
 ;; folds ---
 (use-package hideshow

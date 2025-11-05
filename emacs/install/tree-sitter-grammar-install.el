@@ -11,6 +11,7 @@
      (make "https://github.com/alemuller/tree-sitter-make")
 	 (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown/src")
 	 (markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")
+	 (nix "https://github.com/nix-community/tree-sitter-nix")
      (python "https://github.com/tree-sitter/tree-sitter-python")
      (r "https://github.com/r-lib/tree-sitter-r")
      (toml "https://github.com/tree-sitter/tree-sitter-toml")
