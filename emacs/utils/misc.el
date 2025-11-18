@@ -48,14 +48,16 @@
 (electric-pair-mode 1);; auto close bracket insertion
 (setq electric-pair-pairs
       (append electric-pair-pairs
-              '((?\{ . ?\})
-                (?' . ?'))))
+              '((?\{ . ?\}))))
+                ;; (?' . ?'))))
 (defun goto-matching-parenthesis (arg)
   "Go to the matching parenthesis."
   (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
+
+;; backups files ---
 ;; Define subdirectories inside `user-emacs-directory`
 (defvar my-backup-dir (expand-file-name "backups/" user-emacs-directory))
 (defvar my-autosave-dir (expand-file-name "autosaves/" user-emacs-directory))
@@ -132,29 +134,78 @@
   :config
   (setq hs-hide-comments-when-hiding-all nil)
   (setq hs-isearch-open t)
-  (defun hs-global-cycle ()
+
+  ;; --- NEW function: cycle inside the current nesting level ---
+  (defun hs-cycle-current-level ()
+    "Cycle hideshow states at the current nesting level."
     (interactive)
-    (pcase last-command
-      ('hs-global-cycle
-       (save-excursion (hs-show-all))
-       (setq this-command 'hs-global-show))
-      (_ (hs-hide-all))))
-  :hook ((find-file-mode . hs-minor-mode)
-	 (prog-mode . hs-minor-mode))
-	 ;; (hs-minor-mode . hs-hide-all))
+    (save-excursion
+      ;; Move to beginning of current block or stay where we are
+      (let* ((initial-point (point))
+             (block-start (progn
+                            (ignore-errors (hs-find-block-beginning))
+                            (point)))
+             (command (if (eq last-command 'hs-cycle-current-level)
+                          this-command
+                        'start)))
+
+        (pcase command
+          ;; First call → toggle this block normally
+          ('start
+           (hs-toggle-hiding)
+           (setq this-command 'hs-cycle-current-level))
+
+          ;; Second call → hide children inside this block
+          ('hs-cycle-current-level
+           (goto-char block-start)
+           (hs-hide-level 1))
+
+          ;; Third call → show this block
+          ('hs-cycle-current-level
+           (goto-char block-start)
+           (hs-show-block))
+
+          ;; Fourth call → show everything in this nesting level
+          ('hs-cycle-current-level
+           (goto-char block-start)
+           (hs-show-level 1))))))
+
+  ;; Replace your old hs-global-cycle binding here
+  :hook ((find-file . hs-minor-mode)
+         (prog-mode . hs-minor-mode))
   :bind (:map hs-minor-mode-map
-			  ("C-<tab>" . hs-toggle-hiding)
-			  ("C-<iso-lefttab>" . hs-global-cycle)))
+              ("C-<tab>" . hs-toggle-hiding)
+              ("C-<iso-lefttab>" . hs-cycle-current-level)))
+
+;; (use-package hideshow
+;;   :ensure t
+;;   :config
+;;   (setq hs-hide-comments-when-hiding-all nil)
+;;   (setq hs-isearch-open t)
+;;   (defun hs-global-cycle ()
+;;     (interactive)
+;;     (pcase last-command
+;;       ('hs-global-cycle
+;;        (save-excursion (hs-show-all))
+;;        (setq this-command 'hs-global-show))
+;;       (_ (hs-hide-all))))
+;;   :hook ((find-file-mode . hs-minor-mode)
+;; 	 (prog-mode . hs-minor-mode))
+;; 	 ;; (hs-minor-mode . hs-hide-all))
+;;   :bind (:map hs-minor-mode-map
+;; 			  ("C-<tab>" . hs-toggle-hiding)
+;; 			  ("C-<iso-lefttab>" . hs-global-cycle)))
 
 ;; key bindings ---
-(define-key input-decode-map [?\C-i] [C-i])                     ;; unbind C-i from TAB (GUI mode only)
+;; (define-key input-decode-map [?\C-i] [C-i])             ;; unbind C-i from TAB (GUI mode only)
+(keyboard-translate ?\C-i ?\C-i)
 (global-set-key (kbd "<C-i>") 'indent-relative)         ;; ... and remap it to indent-relative
-(global-set-key (kbd "M-i") 'indent-region)                     ;; indent a region correctly
-(global-set-key (kbd "C-ù") 'goto-matching-parenthesis)            ;; go to matching parenthesis
+(global-set-key (kbd "M-i") 'indent-region)             ;; indent a region correctly
+(global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "C-c h") 'replace-string)          ;; replace string
 (global-set-key [M-right] 'forward-sexp)
 (global-set-key [M-left] 'backward-sexp)
-(global-set-key (kbd "C-x t") 'treemacs)                        ;; toggle treemacs
-(global-set-key (kbd "RET") 'newline-and-indent)        ;; indent after newline
-(global-set-key (kbd "C-j") 'join-line)             ;; join line with previous one
-(global-set-key (kbd "C-$") 'window-swap-states)    ;; join line with previous one
+(global-set-key (kbd "C-x t") 'treemacs)         ;; toggle treemacs
+(global-set-key (kbd "RET") 'newline-and-indent) ;; indent after newline
+(global-set-key (kbd "C-j") 'join-line)          ;; join line with previous one
+(global-set-key (kbd "C-$") 'window-swap-states) ;; join line with previous one
