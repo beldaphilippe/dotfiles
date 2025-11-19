@@ -30,3 +30,4 @@ When emacs is run with a certain configuration, it generates several directories
 
 ## TODO
 [ ] C-l support
+[ ] C-del support for Camel case notation
