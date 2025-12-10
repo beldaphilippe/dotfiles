@@ -1,5 +1,8 @@
 (use-package nix-ts-mode
   :ensure t
+  :init (unless (package-installed-p 'nix-ts-mode)
+          (treesit-install-language-grammar
+           '(nix "https://github.com/nix-community/tree-sitter-nix")))
   :mode "\\.nix\\'")
 
 (defun my/run-nix-develop (shell-buffer nix-shell-name)

@@ -39,9 +39,10 @@
   (evil-define-key 'normal 'global (kbd "C-w k") 'evil-window-up)
   (evil-define-key 'normal 'global (kbd "C-w l") 'evil-window-right)
   ;; configuration for org-mode
-  (evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)
-  (evil-define-key 'normal org-mode-map (kbd "RET") 'org-enter-maybe-execute-code)
-  (evil-set-undo-system 'undo-tree))
+  (if (package-installed-p 'org-modern)
+    (evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle)
+    (evil-define-key 'normal org-mode-map (kbd "RET") 'org-enter-maybe-execute-code)
+    (evil-set-undo-system 'undo-tree)))
 
 ;; escape everything in Emacs with "kj"
 (use-package evil-escape
