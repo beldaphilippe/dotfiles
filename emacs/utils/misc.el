@@ -134,6 +134,7 @@
   :config
   (setq hs-hide-comments-when-hiding-all nil)
   (setq hs-isearch-open t)
+  (add-hook 'prog-mode-hook #'hs-minor-mode)
 
   ;; --- NEW function: cycle inside the current nesting level ---
   (defun hs-cycle-current-level ()
@@ -171,8 +172,8 @@
            (hs-show-level 1))))))
 
   ;; Replace your old hs-global-cycle binding here
-  :hook ((find-file . hs-minor-mode)
-         (prog-mode . hs-minor-mode))
+  ;; :hook ((find-file . hs-minor-mode)
+  ;;        (prog-mode . hs-minor-mode))
   :bind (:map hs-minor-mode-map
               ("C-<tab>" . hs-toggle-hiding)
               ("C-<iso-lefttab>" . hs-cycle-current-level)))
