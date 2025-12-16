@@ -23,12 +23,13 @@
     "utils/live-server.el"))
 
 (my/load
-  '("langs/prog-mode.el"
-    "langs/c.el"
-    "langs/glsl.el"
-    "langs/latex.el"
-    "langs/lisp.el"
-    "langs/markdown.el"
+  '(;"langs/prog-mode.el"
+    ;; "langs/c.el"
+    ;; "langs/glsl.el"
+    ;; "langs/latex.el"
+    ;; "langs/lisp.el"
+    ;; "langs/markdown.el"
     "langs/nix.el"
     ;"langs/org.el"
-    "langs/rmd.el"))
+    ;"langs/rmd.el"
+    ))
