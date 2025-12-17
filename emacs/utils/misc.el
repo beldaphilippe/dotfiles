@@ -83,12 +83,12 @@
   :ensure t
   :hook (prog-mode . (lambda ()
                        (unless (derived-mode-p 'emacs-lisp-mode)
-                         (highlight-indent-guides-mode))))
-  :config (setq highlight-indent-guides-method                   'bitmap
-                highlight-indent-guides-responsive               'top
-                highlight-indent-guides-auto-enabled             nil
-                highlight-indent-guides-bitmap-function          'highlight-indent-guides--bitmap-line
-                highlight-indent-guides-auto-top-character-face-perc 100))
+                         (highlight-indent-guides-mode)))))
+  ;; :config (setq highlight-indent-guides-method                   'bitmap
+  ;;               highlight-indent-guides-responsive               'top
+  ;;               highlight-indent-guides-auto-enabled             nil
+  ;;               highlight-indent-guides-bitmap-function          'highlight-indent-guides--bitmap-line
+  ;;               highlight-indent-guides-auto-top-character-face-perc 100))
 
 ;; nice-looking modeline ---
 (use-package doom-modeline
@@ -131,10 +131,10 @@
 ;; folds ---
 (use-package hideshow
   :ensure t
+  :hook (prog-mode . hs-minor-mode)
   :config
   (setq hs-hide-comments-when-hiding-all nil)
   (setq hs-isearch-open t)
-  (add-hook 'prog-mode-hook #'hs-minor-mode)
 
   ;; --- NEW function: cycle inside the current nesting level ---
   (defun hs-cycle-current-level ()
@@ -199,8 +199,10 @@
 
 ;; key bindings ---
 ;; (define-key input-decode-map [?\C-i] [C-i])             ;; unbind C-i from TAB (GUI mode only)
-(keyboard-translate ?\C-i ?\C-i)
-(global-set-key (kbd "<C-i>") 'indent-relative)         ;; ... and remap it to indent-relative
+(keyboard-translate ?\C-i ?\H-i)
+(keyboard-translate ?\C-m ?\H-m)
+;; (global-set-key [?\H-m] 'delete-backward-char)
+(global-set-key (kbd "H-i") 'indent-relative)           ;; ... and remap it to indent-relative
 (global-set-key (kbd "M-i") 'indent-region)             ;; indent a region correctly
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "C-c h") 'replace-string)          ;; replace string

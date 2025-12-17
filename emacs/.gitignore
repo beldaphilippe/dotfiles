@@ -3,7 +3,11 @@
 !ext/
 !init.el
 !init/
+!init/**
 !install/
+!install/**
 !langs/
+!langs/**
 !README.md
 !utils/
+!utils/**

@@ -23,7 +23,7 @@
     "utils/live-server.el"))
 
 (my/load
-  '(;"langs/prog-mode.el"
+  '("langs/prog-mode.el"
     ;; "langs/c.el"
     ;; "langs/glsl.el"
     ;; "langs/latex.el"
