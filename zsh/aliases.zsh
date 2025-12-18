@@ -1,5 +1,6 @@
 alias ll="ls -lA --color=auto"
 alias l="ll"
+alias bat="batcat"
 
 # emacs
 alias ec="emacsclient -c || (emacs --daemon && emacsclient -c)"
@@ -10,4 +11,5 @@ alias ga="git add"
 alias gb="git branch"
 alias gcmsg="git commit -m"
 alias glog="git log --all --pretty --graph --oneline --decorate=auto"
-alias gst="git status"
+alias gst="git status" 
+alias gf="git fetch --prune"
