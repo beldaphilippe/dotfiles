@@ -1,8 +1,13 @@
 (use-package nix-ts-mode
   :ensure t
-  :init (unless (package-installed-p 'nix-ts-mode)
-          (treesit-install-language-grammar
-           '(nix "https://github.com/nix-community/tree-sitter-nix")))
+  :init
+  ;; Only install Nix grammar if not already installed
+  (unless (treesit-language-available-p 'nix)
+    (treesit-install-language-grammar
+     'nix "https://github.com/nix-community/tree-sitter-nix"))
+  ;; :init (unless (package-installed-p 'nix-ts-mode)
+  ;;         (treesit-install-language-grammar
+  ;;          '(nix "https://github.com/nix-community/tree-sitter-nix")))
   :mode "\\.nix\\'")
 
 (defun my/run-nix-develop (shell-buffer nix-shell-name)

@@ -2,7 +2,7 @@ alias ll="ls -lA --color=auto"
 alias l="ll"
 
 # emacs
-alias ec="emacsclient -c || (emacs --daemon && emacsclient -c)"
+alias ec="(emacsclient -c > /dev/null) || ((emacs --daemon > /dev/null) && emacsclient -c)"
 alias ek="emacsclient -e \"(kill-emacs)\""
 
 # git
