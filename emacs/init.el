@@ -25,7 +25,7 @@
 (my/load
   '("langs/prog-mode.el"
     ;; "langs/c.el"
-    ;; "langs/glsl.el"
+    "langs/glsl.el"
     ;; "langs/latex.el"
     ;; "langs/lisp.el"
     ;; "langs/markdown.el"
