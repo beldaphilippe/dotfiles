@@ -198,11 +198,7 @@
 ;; 			  ("C-<iso-lefttab>" . hs-global-cycle)))
 
 ;; key bindings ---
-;; (define-key input-decode-map [?\C-i] [C-i])             ;; unbind C-i from TAB (GUI mode only)
-(keyboard-translate ?\C-i ?\H-i)
-(keyboard-translate ?\C-m ?\H-m)
-;; (global-set-key [?\H-m] 'delete-backward-char)
-(global-set-key (kbd "H-i") 'indent-relative)           ;; ... and remap it to indent-relative
+(global-set-key (kbd "M-<tab>") 'indent-relative)           ;; ... and remap it to indent-relative
 (global-set-key (kbd "M-i") 'indent-region)             ;; indent a region correctly
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "C-c h") 'replace-string)          ;; replace string
