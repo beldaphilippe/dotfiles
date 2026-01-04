@@ -4,21 +4,16 @@
  read-file-name-completion-ignore-case t
  read-buffer-completion-ignore-case    t)
 
-;; colorful annotations on the minibuffer completion
+;; minibuffer ---
+
+;; colorful annotations on the minibuffer propositions
 (use-package marginalia
   :ensure t
   :after vertico
   :config
   (marginalia-mode))
 
-;; better minibuffer completion
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
-
-;; vertical interactive completion
+;; minibuffer vertical interactive completion
 (use-package vertico
   :ensure t
   :init (vertico-mode 1)
@@ -30,32 +25,52 @@
   ("M-DEL" . vertico-directory-delete-word))  ; delete words easily
   :config
   (setq vertico-count 17)
-  (setq completion-styles '(flex))
-  (setq completion-category-overrides '((file (styles . (partial-completion))))))
+  )
 
-;; code completion : suggestions
+;; Completion style
+;; Note: this package provides only a backend and must be used by a completion module
+;;       such as Consult, Vertico or Company
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless))
+  (completion-category-defaults nil)    ; I want to be in control!
+  (completion-category-overrides '((file (styles basic
+                                                 partial-completion
+                                                 orderless))))
+  (completion-pcm-leading-wildcard t)
+  )
+
+;; code completion ---
+;; completion frontend suggestions
 (use-package company
   :ensure t
-  :after lsp-mode
-  :hook
-  (prog-mode . company-mode)
-  (prog-mode . electric-pair-mode)
-  ;; :bind (:map company-active-map
-  ;;        ("<tab>" . company-complete-selection)
-  ;;        :map lsp-mode-map
-  ;;        ("<tab>" . company-indent-or-complete-common))
-  :custom ;; like a setq in :config section
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
-  (company-selection-wrap-around t)
-  (company-frontends '(company-pseudo-tooltip-frontend
-                       company-echo-metadata-frontend
-                       company-tng-frontend))
-  :config
-  (company-tng-mode) ; use tab instead of C-n C-p CR
-  ;; Optional: unbind C-n / C-p if you want to disable them in popup
-  (define-key company-active-map (kbd "C-n") nil)
-  (define-key company-active-map (kbd "C-p") nil))
+  ;; :hook
+  ;(prog-mode . company-mode)
+  )
+
+;; (use-package company
+;;   :ensure t
+;;   :after lsp-mode
+;;   :hook
+;;   (prog-mode . company-mode)
+;;   (prog-mode . electric-pair-mode)
+;;   ;; :bind (:map company-active-map
+;;   ;;        ("<tab>" . company-complete-selection)
+;;   ;;        :map lsp-mode-map
+;;   ;;        ("<tab>" . company-indent-or-complete-common))
+;;   :custom ;; like a setq in :config section
+;;   (company-minimum-prefix-length 1)
+;;   (company-idle-delay 0.0)
+;;   (company-selection-wrap-around t)
+;;   (company-frontends '(company-pseudo-tooltip-frontend
+;;                        company-echo-metadata-frontend
+;;                        company-tng-frontend))
+;;   :config
+;;   (company-tng-mode) ; use tab instead of C-n C-p CR
+;;   ;; Optional: unbind C-n / C-p if you want to disable them in popup
+;;   (define-key company-active-map (kbd "C-n") nil)
+;;   (define-key company-active-map (kbd "C-p") nil))
 
 ;; better UI for company
 (use-package company-box
