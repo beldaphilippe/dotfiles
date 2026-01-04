@@ -78,17 +78,21 @@
   :config
   (gcmh-mode 1))
 
-
+;; indentation guides ---
 (use-package highlight-indent-guides
   :ensure t
-  :hook (prog-mode . (lambda ()
-                       (unless (derived-mode-p 'emacs-lisp-mode)
-                         (highlight-indent-guides-mode)))))
-  ;; :config (setq highlight-indent-guides-method                   'bitmap
-  ;;               highlight-indent-guides-responsive               'top
-  ;;               highlight-indent-guides-auto-enabled             nil
-  ;;               highlight-indent-guides-bitmap-function          'highlight-indent-guides--bitmap-line
-  ;;               highlight-indent-guides-auto-top-character-face-perc 100))
+  :hook
+  (prog-mode . (lambda ()
+                 (unless (derived-mode-p 'emacs-lisp-mode)
+                   (highlight-indent-guides-mode 1))))
+  :custom
+  (highlight-indent-guides-delay 0)     ; time to wait before refreshing
+  (highlight-indent-guides-auto-enabled t)
+  (highlight-indent-guides-responsive 'top)
+  
+  (highlight-indent-guides-method 'character)
+  (highlight-indent-guides-auto-character-face-perc 30)
+  (highlight-indent-guides-auto-top-character-face-perc 100))
 
 ;; nice-looking modeline ---
 (use-package doom-modeline
@@ -124,6 +128,23 @@
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+
+;; trailing whitespaces ---
+(use-package ws-butler
+  :ensure t
+  :hook (prog-mode . ws-butler-mode)
+  :custom
+  ;; Only trim whitespace outside of string literals
+  (ws-butler-trim-predicate
+   (lambda (beg end)
+     "Trim whitespace only if region is not part of a string."
+     (not (eq 'font-lock-string-face
+              (get-text-property end 'face)))))
+
+  ;; Optional: preserve whitespace before point
+  ;; (ws-butler-keep-whitespace-before-point t)
+  )
+
 
 ;; tabs ---
 (setq-default indent-tabs-mode nil)
