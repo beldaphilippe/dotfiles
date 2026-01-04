@@ -83,7 +83,8 @@
   :ensure t
   :hook
   (prog-mode . (lambda ()
-                 (unless (derived-mode-p 'emacs-lisp-mode)
+                 (unless (derived-mode-p 'emacs-lisp-mode
+                                         'nix-ts-mode)
                    (highlight-indent-guides-mode 1))))
   :custom
   (highlight-indent-guides-delay 0)     ; time to wait before refreshing
