@@ -81,11 +81,11 @@
 ;; indentation guides ---
 (use-package highlight-indent-guides
   :ensure t
-  :hook
-  (prog-mode . (lambda ()
-                 (unless (derived-mode-p 'emacs-lisp-mode
-                                         'nix-ts-mode)
-                   (highlight-indent-guides-mode 1))))
+  ;; :hook
+  ;; (prog-mode . (lambda ()
+  ;;                (unless (derived-mode-p 'emacs-lisp-mode
+  ;;                                        'nix-ts-mode)
+  ;;                  (highlight-indent-guides-mode 1))))
   :custom
   (highlight-indent-guides-delay 0)     ; time to wait before refreshing
   (highlight-indent-guides-auto-enabled t)
@@ -219,9 +219,16 @@
 ;; 			  ("C-<tab>" . hs-toggle-hiding)
 ;; 			  ("C-<iso-lefttab>" . hs-global-cycle)))
 
+;; ---
+
+(defun smart-align ()
+  (interactive)
+  (align-regexp (region-beginning) (region-end) "=" 1 1 'y)
+  )
+
 ;; key bindings ---
-(global-set-key (kbd "M-<tab>") 'indent-relative)           ;; ... and remap it to indent-relative
-(global-set-key (kbd "M-i") 'indent-region)             ;; indent a region correctly
+(global-set-key (kbd "M-i") 'indent-relative)           ;; ... and remap it to indent-relative
+;; (global-set-key (kbd "M-i") 'indent-region)             ;; indent a region correctly
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "C-c h") 'replace-string)          ;; replace string
 (global-set-key [M-right] 'forward-sexp)

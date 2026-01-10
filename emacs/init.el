@@ -32,4 +32,6 @@
     "langs/nix.el"
     ;"langs/org.el"
     ;"langs/rmd.el"
+    "langs/typst.el"
+    "langs/xml.el"
     ))
