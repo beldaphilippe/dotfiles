@@ -8,8 +8,9 @@ alias ek="emacsclient -e \"(kill-emacs)\""
 
 # git
 alias ga="git add"
-alias gb="git branch"
+alias gb="git branch --all"
 alias gcmsg="git commit -m"
-alias glog="git log --all --pretty --graph --oneline --decorate=auto"
-alias gst="git status" 
 alias gf="git fetch --prune"
+alias glog="git log --all --pretty --graph --oneline --decorate=auto"
+alias gs="git switch"
+alias gst="git status"
