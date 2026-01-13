@@ -5,7 +5,8 @@
  read-buffer-completion-ignore-case    t)
 
 ;; minibuffer ---
-
+(setq-default header-line-format mode-line-format)
+(setq-default mode-line-format nil)
 ;; colorful annotations on the minibuffer propositions
 (use-package marginalia
   :ensure t
@@ -25,6 +26,16 @@
   ("M-DEL" . vertico-directory-delete-word))  ; delete words easily
   :config
   (setq vertico-count 17)
+  )
+
+;; displays the minibuffer at window center
+(use-package vertico-posframe
+  :ensure t
+  :after vertico
+  )
+
+(use-package consult
+  :ensure t
   )
 
 ;; Completion style

@@ -158,7 +158,7 @@
   (setq hs-hide-comments-when-hiding-all nil)
   (setq hs-isearch-open t)
 
-  ;; --- NEW function: cycle inside the current nesting level ---
+  ;; -- NEW function: cycle inside the current nesting level --
   (defun hs-cycle-current-level ()
     "Cycle hideshow states at the current nesting level."
     (interactive)
