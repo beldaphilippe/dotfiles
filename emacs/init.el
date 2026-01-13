@@ -26,6 +26,7 @@
   '("langs/prog-mode.el"
     ;; "langs/c.el"
     "langs/glsl.el"
+    "langs/java.el"
     ;; "langs/latex.el"
     ;; "langs/lisp.el"
     ;; "langs/markdown.el"
