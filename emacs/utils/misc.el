@@ -100,6 +100,8 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+(column-number-mode 1)
+
 ;; nombre de match pour les recherches C-s affiché dans la modeline ---
 (use-package anzu
   :ensure t
