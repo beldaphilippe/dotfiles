@@ -50,6 +50,7 @@
       (append electric-pair-pairs
               '((?\{ . ?\}))))
                 ;; (?' . ?'))))
+
 (defun goto-matching-parenthesis (arg)
   "Go to the matching parenthesis."
   (interactive "p")
@@ -160,7 +161,7 @@
   (setq hs-hide-comments-when-hiding-all nil)
   (setq hs-isearch-open t)
 
-  ;; -- NEW function: cycle inside the current nesting level --
+  ;; Cycle inside the current nesting level
   (defun hs-cycle-current-level ()
     "Cycle hideshow states at the current nesting level."
     (interactive)
@@ -221,16 +222,10 @@
 ;; 			  ("C-<tab>" . hs-toggle-hiding)
 ;; 			  ("C-<iso-lefttab>" . hs-global-cycle)))
 
-;; ---
-
-(defun smart-align ()
-  (interactive)
-  (align-regexp (region-beginning) (region-end) "=" 1 1 'y)
-  )
-
 ;; key bindings ---
-(global-set-key (kbd "M-i") 'indent-relative)           ;; ... and remap it to indent-relative
-;; (global-set-key (kbd "M-i") 'indent-region)             ;; indent a region correctly
+
+(global-set-key (kbd "M-i") 'indent-relative)           ;;  indent-relative
+(global-set-key (kbd "C-x C-b") 'switch-to-buffer)      ; avoid fat fingers
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "C-c h") 'replace-string)          ;; replace string
 (global-set-key [M-right] 'forward-sexp)

@@ -1,17 +1,7 @@
 (use-package nix-ts-mode
   :ensure t
   :config
-  (require 'treesit)
-  
-  ;; Add nix grammar if not yet already assigned
-  (unless (assoc 'nix treesit-language-source-alist)
-    (add-to-list
-     'treesit-language-source-alist
-     '(nix "https://github.com/nix-community/tree-sitter-nix")))
-
-  ;; Only install Nix grammar if not already installed
-  (unless (treesit-language-available-p 'nix)
-    (treesit-install-language-grammar 'nix))
+  (ts-add-lang 'nix "https://github.com/nix-community/tree-sitter-nix")
 
   :mode "\\.nix\\'")
 

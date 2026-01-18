@@ -23,16 +23,18 @@
     "utils/live-server.el"))
 
 (my/load
-  '("langs/prog-mode.el"
+ (mapcar
+  (lambda (file) (concat "langs/" file))
+  '("utils.el"
     ;; "langs/c.el"
-    "langs/glsl.el"
-    "langs/java.el"
+    "glsl.el"
+    "java.el"
     ;; "langs/latex.el"
     ;; "langs/lisp.el"
     ;; "langs/markdown.el"
-    "langs/nix.el"
-    ;"langs/org.el"
-    ;"langs/rmd.el"
-    "langs/typst.el"
-    "langs/xml.el"
-    ))
+    "nix.el"
+    ;; "langs/org.el"
+    ;; "langs/rmd.el"
+    "typst.el"
+    "xml.el"
+    )))

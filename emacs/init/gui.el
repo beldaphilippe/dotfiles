@@ -45,5 +45,6 @@
 ;; fonts ---
 
 (set-face-attribute 'default nil
-					:family "JetBrainsMono Nerd Font"
+					;; :family "JetBrainsMono Nerd Font"
+                    :family "Fira Code"
 					:height 130)  ;; 110 means 11pt (roughly)
