@@ -1,0 +1,15 @@
+[core]
+    editor = "vim"
+    
+[init]
+    defaultBranch = "main"
+
+[pull]
+    rebase = false
+    
+[user]
+    name = "phil"
+
+[alias]
+    branch = branch --all
+    fetch = fetch --prune
