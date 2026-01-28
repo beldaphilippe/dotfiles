@@ -9,7 +9,7 @@
   (unless (assoc language treesit-language-source-alist)
     (add-to-list
      'treesit-language-source-alist
-     '(,language ,grammar-path)))
+     `(,language ,grammar-path)))
 
   ;; Only install Nix grammar if not already installed
   (unless (treesit-language-available-p language)
