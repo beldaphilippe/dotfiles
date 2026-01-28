@@ -9,6 +9,7 @@
     
 [user]
     name = "phil"
+    email = "belda.philippe@proton.com"
 
 [alias]
     branch = branch --all
