@@ -149,6 +149,8 @@
   ;; (ws-butler-keep-whitespace-before-point t)
   )
 
+;; adding new line at the end of file ---
+(setq-default require-final-newline t)
 
 ;; tabs ---
 (setq-default indent-tabs-mode nil)
