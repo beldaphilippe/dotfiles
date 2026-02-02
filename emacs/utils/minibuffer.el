@@ -22,13 +22,16 @@
   )
 
 ;; displays the minibuffer at window center
-;; (use-package vertico-posframe
-;;   :ensure t
-;;   :after vertico
-;;   )
+(use-package vertico-posframe
+  :ensure t
+  :after vertico
+  :init (vertico-posframe-mode 1)
+  )
 
 (use-package consult
   :ensure t
+  ;; :bind (:map ctl-x-map
+  ;;             ("b" . consult-buffer))
   )
 
 ;; Completion style

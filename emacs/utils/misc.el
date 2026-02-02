@@ -227,7 +227,8 @@
 ;; key bindings ---
 
 (global-set-key (kbd "M-i") 'indent-relative)           ;;  indent-relative
-(global-set-key (kbd "C-x C-b") 'switch-to-buffer)      ; avoid fat fingers
+(global-set-key (kbd "C-x b") 'consult-buffer)          ;; replace string
+(global-set-key (kbd "C-x C-b") 'consult-buffer)        ;; avoid fat fingers
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "C-c h") 'replace-string)          ;; replace string
 (global-set-key [M-right] 'forward-sexp)

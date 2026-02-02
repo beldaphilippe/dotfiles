@@ -28,12 +28,6 @@
   (setq vertico-count 17)
   )
 
-;; displays the minibuffer at window center
-(use-package vertico-posframe
-  :ensure t
-  :after vertico
-  )
-
 (use-package consult
   :ensure t
   )
