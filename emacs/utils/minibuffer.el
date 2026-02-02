@@ -10,7 +10,7 @@
 ;; minibuffer vertical interactive completion
 (use-package vertico
   :ensure t
-  :init (vertico-mode 1)
+  :init (vertico-mode)
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy) ; when a directory's name is incomplete, delete the name completely in Vertico
   :bind
   (:map vertico-map
@@ -23,11 +23,28 @@
 
 ;; displays the minibuffer at window center
 (use-package vertico-posframe
-  :ensure t
   :after vertico
-  :init (vertico-posframe-mode 1)
-  )
+  :ensure t
+  :init
+  (vertico-posframe-mode 1)
+  ;; :config
+  ;; (defun my/vertico-posframe-get-size (buffer)
+  ;;   "Function to be used by `vertico-posframe-size-function'."
+  ;;   (list
+  ;;    :height (buffer-local-value 'vertico-posframe-height buffer)
+  ;;    :width (round (* (frame-width) 0.62))
+  ;;    :min-height (or (buffer-local-value 'vertico-posframe-min-height buffer)
+  ;;                    (let ((height (+ vertico-count 1)))
+  ;;                      (min height (or (buffer-local-value 'vertico-posframe-height buffer) height))))
+  ;;    :min-width (or (buffer-local-value 'vertico-posframe-min-width buffer)
+  ;;                   (let ((width (round (* (frame-width) 0.62))))
+  ;;                     (min width (or (buffer-local-value 'vertico-posframe-width buffer) width))))))
 
+  ;; (setq  vertico-posframe-size-function #'my/vertico-posframe-get-size)
+  )
+(with-eval-after-load 'vertico (vertico-posframe-mode 1))
+
+;; very useful
 (use-package consult
   :ensure t
   ;; :bind (:map ctl-x-map

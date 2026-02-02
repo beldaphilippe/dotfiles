@@ -31,3 +31,4 @@ When emacs is run with a certain configuration, it generates several directories
 ## TODO
 [ ] C-l support
 [ ] packages to check: consult, org-roam, vertico-posframe
+[ ] posframe minibuffer mode, fixed size of minibuffer (proportional to space available)

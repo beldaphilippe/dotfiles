@@ -20,6 +20,7 @@
   '("utils/misc.el"
     "utils/completion.el"
     "utils/evil.el"
+    "utils/minibuffer.el"
     "utils/live-server.el"))
 
 (my/load
