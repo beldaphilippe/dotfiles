@@ -1,6 +1,6 @@
 ;; Useful functions concerning languages
 
-(defun ts-add-lang (language grammar-path)
+(defun ts-add-lang (language grammar-path &optional branch subdir)
   "Add LANGUAGE grammar GRAMMAR-PATH to treesitter list, and install if not yet available."
   (interactive)
   (require 'treesit)
@@ -9,7 +9,7 @@
   (unless (assoc language treesit-language-source-alist)
     (add-to-list
      'treesit-language-source-alist
-     `(,language ,grammar-path)))
+     `(,language ,grammar-path ,branch ,subdir)))
 
   ;; Only install Nix grammar if not already installed
   (unless (treesit-language-available-p language)

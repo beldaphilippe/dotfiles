@@ -32,7 +32,7 @@
     "java.el"
     ;; "langs/latex.el"
     ;; "langs/lisp.el"
-    ;; "langs/markdown.el"
+    "markdown.el"
     "nix.el"
     ;; "langs/org.el"
     ;; "langs/rmd.el"
