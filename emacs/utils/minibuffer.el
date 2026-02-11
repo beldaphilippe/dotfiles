@@ -11,7 +11,7 @@
 (use-package vertico
   :ensure t
   :init (vertico-mode)
-  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy) ; when a directory's name is incomplete, delete the name completely in Vertico
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy) ; when a directory name is incomplete, delete the name completely in Vertico
   :bind
   (:map vertico-map
         ("RET" . vertico-directory-enter)           ; make Return enter directories

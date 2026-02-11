@@ -34,6 +34,10 @@
   (if (fboundp 'fringe-mode) (fringe-mode 1))
   (if (fboundp 'display-time-mode) (display-time-mode t)))
 
+;; put the modeline at the top
+(setq-default header-line-format mode-line-format)
+(setq-default mode-line-format nil)
+
 ;; themes ---
 
 (use-package gruvbox-theme
