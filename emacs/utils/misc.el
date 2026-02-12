@@ -12,23 +12,12 @@
 (setq-default display-fill-column-indicator-character ?│) ; use a thin vertical bar
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)  ; display a visual line at <fill-column> characters
 
-;; line numbers ---
-;; display lines numbers (relative for vim bindings and absolute for emacs bindings)
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (setq display-line-numbers-type (if (bound-and-true-p evil-mode)
-                                                'relative
-                                              'absolute)
-                  display-line-numbers 1)))
-
 ;; extend pattern on visual line ---
 (use-package extend-pattern
   :ensure nil
   :load-path "../ext"
   :hook (prog-mode . extend-pattern-mode))
 
-;; tabulation width
-(setq-default tab-width 4)
 ;; open URLs in the default web browser (not EWW) using XDG's utilace
 (setq-default  browse-url-generic-program "xdg-open")
 ;; to edit gpg files, password asker
@@ -42,9 +31,9 @@
 
 ;; parenthesis ---
 (show-paren-mode 1)       ;; matching parentheses
-(setq show-paren-delay 0) ;; no delay
-(setq show-paren-style 'parenthesis)
-(setq show-paren-when-point-inside-paren t)
+(setq-default show-paren-delay 0 ;; no delay
+              show-paren-style 'parenthesis
+              show-paren-when-point-inside-paren t)
 (electric-pair-mode 1);; auto close bracket insertion
 (setq electric-pair-pairs
       (append electric-pair-pairs
@@ -69,8 +58,20 @@
 (setq backup-directory-alist `((".*" . ,my-backup-dir)))
 (setq auto-save-file-name-transforms `((".*" ,my-autosave-dir t)))
 
-;; aliases ---
-(defalias 'ar #'align-regexp)
+;; align regexp ---
+(defun align-regexp-repeat (beg end regexp
+                               &optional group spacing)
+  "Wrapper for align-regexp with repeat."
+  (interactive
+   (list (region-beginning)
+         (region-end)
+         (concat "\\(\\s-*\\)"
+                 (read-string "Align regexp: "))
+         1
+         align-default-spacing))
+  (align-regexp beg end regexp group spacing t))
+
+(defalias 'ar #'align-regexp-repeat)
 
 ;; management of GC ---
 (use-package gcmh
@@ -82,6 +83,7 @@
 ;; indentation guides ---
 (use-package highlight-indent-guides
   :ensure t
+  :defer t
   ;; :hook
   ;; (prog-mode . (lambda ()
   ;;                (unless (derived-mode-p 'emacs-lisp-mode
@@ -94,14 +96,8 @@
   
   (highlight-indent-guides-method 'character)
   (highlight-indent-guides-auto-character-face-perc 30)
-  (highlight-indent-guides-auto-top-character-face-perc 100))
-
-;; nice-looking modeline ---
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-
-(column-number-mode 1)
+  (highlight-indent-guides-auto-top-character-face-perc 100)
+  )
 
 ;; nombre de match pour les recherches C-s affiché dans la modeline ---
 (use-package anzu
@@ -110,7 +106,8 @@
   (global-anzu-mode))
 
 
-(defun rename-current-buffer-file ()
+;; (defun rename-current-buffer-file ()
+(defun mv ()
   "Renames current buffer and file it is visiting."
   (interactive)
   (let* ((name (buffer-name))
@@ -153,7 +150,14 @@
 (setq-default require-final-newline t)
 
 ;; tabs ---
-(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4
+              indent-tabs-mode nil)
+
+;; centers text ---
+(use-package olivetti
+  :defer t
+  :config
+  (setq olivetti-style t))
 
 ;; folds ---
 (use-package hideshow

@@ -11,6 +11,7 @@
 ;; configuration of evil package
 (use-package evil
   :ensure t
+  :defer t
   :init
   (setq evil-want-keybinding nil)
    :config

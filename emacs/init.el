@@ -12,16 +12,21 @@
 
 ;; files are loaded according to the list order
 (my/load
-  '("init/encoding.el"
-    "init/package.el"
-    "init/gui.el"))
+ '(
+   "init/gui.el"
+   "init/encoding.el"
+   "init/package.el"
+   ))
 
 (my/load
-  '("utils/misc.el"
-    "utils/completion.el"
-    "utils/evil.el"
-    "utils/minibuffer.el"
-    "utils/live-server.el"))
+ '(
+   "utils/modeline.el"
+   "utils/minibuffer.el"
+   "utils/misc.el"
+   "utils/completion.el"
+   "utils/evil.el"
+   "utils/live-server.el"
+   ))
 
 (my/load
  (mapcar
@@ -32,9 +37,9 @@
     "java.el"
     ;; "langs/latex.el"
     ;; "langs/lisp.el"
-    ;; "langs/markdown.el"
+    "langs/markdown.el"
     "nix.el"
-    ;; "langs/org.el"
+    "langs/org.el"
     ;; "langs/rmd.el"
     "typst.el"
     "xml.el"

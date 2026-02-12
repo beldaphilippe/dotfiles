@@ -73,7 +73,7 @@ The last character is repeated to fill the visual line.")
   "Toggles local extend-pattern-mode."
   :lighter " extend pattern"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-<dead-circumflex>") #'extend-pattern--update-overlays)
+            (define-key map (kbd "C-*") #'extend-pattern--update-overlays)
             map)
 
   (if extend-pattern-mode

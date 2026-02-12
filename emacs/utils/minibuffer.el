@@ -23,30 +23,44 @@
 
 ;; displays the minibuffer at window center
 (use-package vertico-posframe
-  :after vertico
   :ensure t
   :init
+  (setq vertico-posframe-parameters   '((left-fringe  . 12)    ;; Fringes
+                                        (right-fringe . 12)
+                                        (undecorated  . nil))) ;; Rounded frame
+  :config
   (vertico-posframe-mode 1)
-  ;; :config
-  ;; (defun my/vertico-posframe-get-size (buffer)
-  ;;   "Function to be used by `vertico-posframe-size-function'."
-  ;;   (list
-  ;;    :height (buffer-local-value 'vertico-posframe-height buffer)
-  ;;    :width (round (* (frame-width) 0.62))
-  ;;    :min-height (or (buffer-local-value 'vertico-posframe-min-height buffer)
-  ;;                    (let ((height (+ vertico-count 1)))
-  ;;                      (min height (or (buffer-local-value 'vertico-posframe-height buffer) height))))
-  ;;    :min-width (or (buffer-local-value 'vertico-posframe-min-width buffer)
-  ;;                   (let ((width (round (* (frame-width) 0.62))))
-  ;;                     (min width (or (buffer-local-value 'vertico-posframe-width buffer) width))))))
+  (setq vertico-posframe-width        96                       ;; Narrow frame
+        vertico-posframe-height       vertico-count            ;; Default height
+        ;; Don't create posframe for these commands
+        vertico-multiform-commands    '((consult-line    (:not posframe))
+                                        (consult-ripgrep (:not posframe)))))
+;; (use-package vertico-posframe
+;;   :after vertico
+;;   :ensure t
+;;   :init
+;;   (vertico-posframe-mode 1)
+;;   ;; :config
+;;   ;; (defun my/vertico-posframe-get-size (buffer)
+;;   ;;   "Function to be used by `vertico-posframe-size-function'."
+;;   ;;   (list
+;;   ;;    :height (buffer-local-value 'vertico-posframe-height buffer)
+;;   ;;    :width (round (* (frame-width) 0.62))
+;;   ;;    :min-height (or (buffer-local-value 'vertico-posframe-min-height buffer)
+;;   ;;                    (let ((height (+ vertico-count 1)))
+;;   ;;                      (min height (or (buffer-local-value 'vertico-posframe-height buffer) height))))
+;;   ;;    :min-width (or (buffer-local-value 'vertico-posframe-min-width buffer)
+;;   ;;                   (let ((width (round (* (frame-width) 0.62))))
+;;   ;;                     (min width (or (buffer-local-value 'vertico-posframe-width buffer) width))))))
 
-  ;; (setq  vertico-posframe-size-function #'my/vertico-posframe-get-size)
-  )
-(with-eval-after-load 'vertico (vertico-posframe-mode 1))
+;;   ;; (setq  vertico-posframe-size-function #'my/vertico-posframe-get-size)
+;;   )
+;; (with-eval-after-load 'vertico (vertico-posframe-mode 1))
 
 ;; very useful
 (use-package consult
   :ensure t
+  :defer t
   ;; :bind (:map ctl-x-map
   ;;             ("b" . consult-buffer))
   )

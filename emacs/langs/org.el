@@ -1,35 +1,52 @@
-;; ORG mode live execution
 (use-package org-modern
   :ensure t
-  :init
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((shell . t)
-     (C . t)
-     (python . t)
-     (emacs-lisp . t)))
-  :hook
-  (org-mode . org-indent-mode)
-  (org-mode . org-modern-mode)
-  ;;(org-mode . (lambda () (local-set-key (kbd "TAB") 'org-fold-or-unfold-heading)))
-  (org-mode . visual-line-mode)
-  :config
-  (declare-function org-export-to-file "org-mode")
-  (setq browse-url-browser-function #'browse-url-firefox)
-  (setq org-modern-star '("✪" "✪" "✪" "✪" "✪"))
-  (setq org-image-actual-width 500)
-  (setq org-src-preserve-indentation nil
-      org-src-tab-acts-natively t
-      org-edit-src-content-indentation 0
-      org-confirm-babel-evaluate nil
-   org-startup-indented t
-      org-hide-emphasis-markers t)
-  :custom
-  (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.30))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.25))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.20))))
-   '(org-level-4 ((t (:inherit outline-4 :height 1.15))))
-   '(org-level-5 ((t (:inherit outline-5 :height 1.10))))
-   '(org-level-6 ((t (:inherit outline-6 :height 1.05))))
-   '(org-level-7 ((t (:inherit outline-7 :height 1.00))))))
+  :defer t
+  :hook (org-mode . org-modern-mode))
+
+;; Resize Org headings
+(dolist (face '((org-level-1 . 1.35)
+                (org-level-2 . 1.3)
+                (org-level-3 . 1.2)
+                (org-level-4 . 1.1)
+                (org-level-5 . 1.1)
+                (org-level-6 . 1.1)
+                (org-level-7 . 1.1)
+                (org-level-8 . 1.1)))
+  )
+  ;; (set-face-attribute (car face) nil :font "Open Sans" :weight 'bold :height (cdr face)))
+
+;; Make the document title a bit bigger
+(set-face-attribute 'org-document-title nil :font "Open Sans" :weight
+                    'bold :height 1.8)
+
+(require 'org-indent)
+(set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
+
+
+(set-face-attribute 'org-block nil            :foreground nil :inherit
+                    'fixed-pitch :height 0.85)
+(set-face-attribute 'org-code nil             :inherit '(shadow fixed-pitch) :height 0.85)
+(set-face-attribute 'org-indent nil           :inherit '(org-hide fixed-pitch) :height 0.85)
+(set-face-attribute 'org-verbatim nil         :inherit '(shadow fixed-pitch) :height 0.85)
+(set-face-attribute 'org-special-keyword nil  :inherit '(font-lock-comment-face
+fixed-pitch))
+(set-face-attribute 'org-meta-line nil        :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil         :inherit 'fixed-pitch)
+
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+
+(plist-put org-format-latex-options :scale 2)
+
+(setq org-adapt-indentation t
+      org-hide-leading-stars t
+      org-hide-emphasis-markers t
+      org-pretty-entities t
+	  org-ellipsis "  ·")
+
+(setq org-src-fontify-natively t
+	  org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0)
+
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'olivetti-mode)
+(add-hook 'org-mode-hook 'org-indent-mode)

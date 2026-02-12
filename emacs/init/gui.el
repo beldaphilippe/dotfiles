@@ -5,7 +5,7 @@
       )
 
 
-;; first screen on startup
+;; first screen on startup ---
 (use-package dashboard
   :ensure t
   :config
@@ -16,27 +16,11 @@
                           (agenda    . 5)))
   (dashboard-setup-startup-hook))
 
-
-;; Disable bars
-(defun simplify-ui (frame)
-  "Remove from FRAME unwanted menubar/scrollbar/etc."
-  (interactive)
-  (modify-frame-parameters frame
-                           '((menu-bar-lines . 0)
-                             (tool-bar-lines . 0)
-                             (vertical-scroll-bars . nil)
-                             (horizontal-scroll-bars . nil))))
-(add-hook 'after-make-frame-functions 'simplify-ui)
-(when (display-graphic-p)
-  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-  (if (fboundp 'fringe-mode) (fringe-mode 1))
-  (if (fboundp 'display-time-mode) (display-time-mode t)))
-
-;; put the modeline at the top
-(setq-default header-line-format mode-line-format)
-(setq-default mode-line-format nil)
+;; add a border ---
+(use-package spacious-padding
+  :ensure t
+  :config (spacious-padding-mode 1)
+  )
 
 ;; themes ---
 
@@ -68,9 +52,12 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
   )
+;; scrolling ---
+(use-package ultra-scroll
+  :ensure t
+  :config (ultra-scroll-mode 1))
 
 ;; fonts ---
-
 
 ;; for icons
 (use-package nerd-icons
@@ -82,7 +69,111 @@
 ;; on installation, to install icons fonts.
 
 ;; Set font
+(defvar my/font-height 130)
+
+(when (eq system-type 'darwin)
+  (setq my/font-height 140))
+
+(when (member "FiraCode Nerd Font" (font-family-list))
+  (set-face-attribute 'default nil :font "FiraCode Nerd Font" :height my/font-height)
+  (set-face-attribute 'fixed-pitch nil :family "FiraCode Nerd Font"))
+
+(when (member "Open Sans" (font-family-list))
+  (set-face-attribute 'variable-pitch nil :family "Open Sans"))
+
+
 (set-face-attribute 'default nil
 					;; :family "JetBrainsMono Nerd Font"
-                    :family "FiraCode Nerd Font"
+                    :font "FiraCode Nerd Font"
 					:height 130)  ;; 110 means 11pt (roughly)
+
+;; allows you to mix fixed and variable pitched faces in Org and LaTeX mode.
+(use-package mixed-pitch
+  :ensure t
+  :defer t
+  :hook ((org-mode   . mixed-pitch-mode)
+         (LaTeX-mode . mixed-pitch-mode)))
+
+;; ligatures (specific config for Fira Code/Cascadia Code)
+;; https://github.com/mickeynp/ligature.el/wiki
+(use-package ligature
+  :ensure t
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia and Fira Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode
+                        '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
+                          ;; =:= =!=
+                          ("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
+                          ;; ;; ;;;
+                          (";" (rx (+ ";")))
+                          ;; && &&&
+                          ("&" (rx (+ "&")))
+                          ;; !! !!! !. !: !!. != !== !~
+                          ("!" (rx (+ (or "=" "!" "\." ":" "~"))))
+                          ;; ?? ??? ?:  ?=  ?.
+                          ("?" (rx (or ":" "=" "\." (+ "?"))))
+                          ;; %% %%%
+                          ("%" (rx (+ "%")))
+                          ;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
+                          ;; |->>-||-<<-| |- |== ||=||
+                          ;; |==>>==<<==<=>==//==/=!==:===>
+                          ("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
+                                          "-" "=" ))))
+                          ;; \\ \\\ \/
+                          ("\\" (rx (or "/" (+ "\\"))))
+                          ;; ++ +++ ++++ +>
+                          ("+" (rx (or ">" (+ "+"))))
+                          ;; :: ::: :::: :> :< := :// ::=
+                          (":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
+                          ;; // /// //// /\ /* /> /===:===!=//===>>==>==/
+                          ("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
+                                          "="))))
+                          ;; .. ... .... .= .- .? ..= ..<
+                          ("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
+                          ;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
+                          ("-" (rx (+ (or ">" "<" "|" "~" "-"))))
+                          ;; *> */ *)  ** *** ****
+                          ("*" (rx (or ">" "/" ")" (+ "*"))))
+                          ;; www wwww
+                          ("w" (rx (+ "w")))
+                          ;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
+                          ;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
+                          ;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
+                          ;; << <<< <<<<
+                          ("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
+                                          "-"  "/" "|" "="))))
+                          ;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
+                          ;; >> >>> >>>>
+                          (">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
+                          ;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
+                          ("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
+                                       (+ "#"))))
+                          ;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
+                          ("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
+                          ;; __ ___ ____ _|_ __|____|_
+                          ("_" (rx (+ (or "_" "|"))))
+                          ;; Fira code: 0xFF 0x12
+                          ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
+                          ;; Fira code:
+                          "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
+                          ;; The few not covered by the regexps.
+                          "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
+
+;; line numbers ---
+;; display lines numbers (relative for vim bindings and absolute for emacs bindings)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq display-line-numbers-type (if (bound-and-true-p evil-mode)
+                                                'relative
+                                              'absolute)
+                  display-line-numbers 1)))
+;; default line number width to 3 to avoid jumping
+(setq-default display-line-numbers-width 3)
