@@ -32,15 +32,17 @@
  (mapcar
   (lambda (file) (concat "langs/" file))
   '("utils.el"
-    ;; "langs/c.el"
+    "c.el"
+    "cpp.el"
     "glsl.el"
     "java.el"
-    ;; "langs/latex.el"
-    ;; "langs/lisp.el"
-    "langs/markdown.el"
+    ;; "latex.el"
+    ;; "lisp.el"
+    "markdown.el"
     "nix.el"
-    "langs/org.el"
-    ;; "langs/rmd.el"
+    "org.el"
+    "python.el"
+    ;; "rmd.el"
     "typst.el"
     "xml.el"
     )))

@@ -16,14 +16,14 @@
   ;; (set-face-attribute (car face) nil :font "Open Sans" :weight 'bold :height (cdr face)))
 
 ;; Make the document title a bit bigger
-(set-face-attribute 'org-document-title nil :font "Open Sans" :weight
-                    'bold :height 1.8)
+;; (set-face-attribute 'org-document-title nil :font "Open Sans" :weight
+                    ;; 'bold :height 1.8)
 
 (require 'org-indent)
 (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
 
 
-(set-face-attribute 'org-block nil            :foreground nil :inherit
+(set-face-attribute 'org-block nil            :foreground 'unspecified :inherit
                     'fixed-pitch :height 0.85)
 (set-face-attribute 'org-code nil             :inherit '(shadow fixed-pitch) :height 0.85)
 (set-face-attribute 'org-indent nil           :inherit '(org-hide fixed-pitch) :height 0.85)
