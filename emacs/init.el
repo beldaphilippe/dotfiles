@@ -34,6 +34,7 @@
   '("utils.el"
     "c.el"
     "cpp.el"
+    "git.el"
     "glsl.el"
     "java.el"
     ;; "latex.el"
