@@ -13,9 +13,9 @@
 ;; files are loaded according to the list order
 (my/load
  '(
-   "init/gui.el"
-   "init/encoding.el"
-   "init/package.el"
+   "init/encoding.el"                   ; first to set encoding (UTF-8)
+   "init/package.el"                    ; load use-package
+   "init/gui.el"                        ; graphical elements
    ))
 
 (my/load
