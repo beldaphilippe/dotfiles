@@ -59,6 +59,8 @@
 (setq auto-save-file-name-transforms `((".*" ,my-autosave-dir t)))
 
 ;; align regexp ---
+(setq-default align-default-spacing 1)
+
 (defun align-regexp-repeat (beg end regexp
                                &optional group spacing)
   "Wrapper for align-regexp with repeat."
@@ -70,6 +72,14 @@
          1
          align-default-spacing))
   (align-regexp beg end regexp group spacing t))
+
+(defun align-table (beg end)
+  "Align fields after commas.
+Keeps commas attached to the preceding field."
+  (interactive "r")
+  (align-regexp beg end
+                ",\\(\\s-*\\)"
+                1 1 t))
 
 (defalias 'ar #'align-regexp-repeat)
 
