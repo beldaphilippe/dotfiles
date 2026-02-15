@@ -12,6 +12,8 @@
 ;;   :config (push 'company-rtags company-backends)
 ;;   )
 
+(setq-default c-basic-offset 4)
+
 (use-package irony
   :ensure t
   :hook
