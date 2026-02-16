@@ -16,6 +16,7 @@
 
 (use-package irony
   :ensure t
+  :defer t
   :hook
   (c++-mode-hook . irony-mode)
   (c-modeb-hook . irony-mode)

@@ -1,2 +1,3 @@
 (use-package git-modes
-  :ensure t)
+  :ensure t
+  :defer t)

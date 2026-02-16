@@ -1,5 +1,6 @@
 (use-package python-mode
   :ensure t
+  :defer t
   )
 
 ;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
@@ -8,6 +9,7 @@
 
 ;; (use-package python-ts-mode
 ;;   :ensure t
+;;   :defer t
 ;;   :config
 ;;   (ts-add-lang 'python "https://github.com/tree-sitter/tree-sitter-python/releases/tag/v0.23.3")
 

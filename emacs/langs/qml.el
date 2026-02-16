@@ -1,2 +1,3 @@
 (use-package qml-mode
-  :ensure t)
+  :ensure t
+  :defer t)

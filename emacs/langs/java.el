@@ -1,5 +1,6 @@
 (use-package java-ts-mode
   :ensure t
+  :defer t
   :hook
   (java-ts-mode . subword-mode)
   :config

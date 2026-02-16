@@ -1,4 +1,5 @@
 (use-package nxml-mode
+  :defer t
   :mode ("\\.xml\\'" "\\.xsd\\'" "\\.xsl\\'")
   :config
   ;; hideshow support
