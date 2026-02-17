@@ -1,6 +1,7 @@
 (use-package python-mode
   :ensure t
   :defer t
+  :bind ("<f5>" . my/run)
   )
 
 ;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))

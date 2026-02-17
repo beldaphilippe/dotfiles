@@ -32,3 +32,5 @@ When emacs is run with a certain configuration, it generates several directories
 [ ] C-l support
 [ ] packages to check: consult, org-roam, vertico-posframe
 [ ] posframe minibuffer mode, fixed size of minibuffer (proportional to space available)
+[ ] fix hideshow multi fold/unfold
+[ ] org mode config
