@@ -10,6 +10,9 @@
 
 (add-hook 'prog-mode-hook #'completion-preview-mode)
 
+(use-package yasnippet
+  :ensure t
+  :defer t)
 ;; completion frontend suggestions
 ;; (use-package company
 ;;   :ensure t

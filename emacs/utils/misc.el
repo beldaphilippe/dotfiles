@@ -135,11 +135,6 @@ Keeps commas attached to the preceding field."
           (message "File '%s' successfully renamed to '%s'"
                    name (file-name-nondirectory new-name)))))))
 
-;; syntax checking : errors and warnings ---
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
-
 ;; trailing whitespaces ---
 (use-package ws-butler
   :ensure t

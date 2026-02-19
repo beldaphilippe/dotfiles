@@ -25,6 +25,7 @@
    "utils/misc.el"
    "utils/completion.el"
    "utils/evil.el"
+   "utils/lsp.el"
    "utils/live-server.el"
    ))
 
