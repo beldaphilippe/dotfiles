@@ -17,7 +17,16 @@
 ;;   )
 
 ;; builtin
-(use-package eglot)
+(use-package eglot
+  :hook ((python-mode   . eglot-ensure)
+         (nix-ts-mode   . eglot-ensure)
+         (java-ts-mode  . eglot-ensure)
+         (c-ts-mode     . eglot-ensure)
+         (c++-ts-mode   . eglot-ensure)
+         (typst-ts-mode . eglot-ensure)
+         (latex-mode    . eglot-ensure)
+         (js-mode       . eglot-ensure))
+  )
 
 ;; syntax checking : errors and warnings
 (use-package flycheck

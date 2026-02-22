@@ -1,4 +1,4 @@
-alias ll="ls -lA --color=auto"
+alias ll="ls -lAh --color=auto"
 alias l="ll"
 alias bat="batcat"
 
