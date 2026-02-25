@@ -3,11 +3,11 @@
   :defer t
   :hook ((org-mode . org-modern-mode)
          (org-modern-mode . olivetti-mode)
-         (org-modern-mode . org-toggle-inline-images))
-
-
-
-  ;; :config
+         (org-modern-mode . org-toggle-inline-images)
+         (org-modern-mode . visual-line-mode)
+         )
+  :config
+  (setq org-pretty-entities t)
 
   ;; ;; Resize Org headings
   ;; (dolist (face '((org-level-1 . 1.35)
