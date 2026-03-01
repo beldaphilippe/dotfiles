@@ -39,18 +39,23 @@
 (when (eq system-type 'darwin)
   (setq my/font-height 140))
 
-(when (member "FiraCode Nerd Font" (font-family-list))
-  (set-face-attribute 'default nil :font "FiraCode Nerd Font" :height my/font-height)
-  (set-face-attribute 'fixed-pitch nil :family "FiraCode Nerd Font"))
+(defun my/setup-fonts (frame)
+  (with-selected-frame frame
+    (when (display-graphic-p frame)
+      (set-face-attribute 'default nil
+                          ;; :font "FiraCode Nerd Font Mono"
+                          :font "DejaVu Sans Code"
+                          :weight 'normal
+                          :height my/font-height)
+      (set-face-attribute 'fixed-pitch nil
+                          ;; :family "FiraCode Nerd Font Mono")
+                          :family "DejaVu Sans Code")
+      (set-face-attribute 'variable-pitch nil
+                          :family "Open Sans"))))
 
-(when (member "Open Sans" (font-family-list))
-  (set-face-attribute 'variable-pitch nil :family "Open Sans"))
-
-
-(set-face-attribute 'default nil
-					;; :family "JetBrainsMono Nerd Font"
-                    :font "FiraCode Nerd Font"
-					:height 130)  ;; 110 means 11pt (roughly)
+(if (daemonp)
+    (add-hook 'after-make-frame-functions #'my/setup-fonts)
+  (my/setup-fonts (selected-frame)))
 
 ;; allows you to mix fixed and variable pitched faces in Org and LaTeX mode.
 (use-package mixed-pitch

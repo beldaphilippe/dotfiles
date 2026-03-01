@@ -1,0 +1,80 @@
+#+TITLE: My Emacs Config
+
+* Installation
+
+** Dependencies
+- Download [[https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip][FiraCode Nerd Font]], then put every ~.ttf~ file in the ~$HOME/.local/share/fonts~ directory.
+  #+BEGIN_SRC Bash
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip -O $HOME/Downloads/FiraCode.zip
+    unzip $HOME/Downloads/FiraCode.zip -d $HOME/.local/share/fonts
+#+END_SRC
+- Install some language servers for eglot:
+  #+BEGIN_SRC
+    pyright                    # python
+    nixd                       # nix
+    java-language-server       # java
+    ccls                       # c/c++ powered by clang
+    tinymist                   # typst
+    texlab                     # latex
+    typescript-language-server # js and ts
+#+END_SRC
+- clone this repo to ~~/.config/emacs/~
+  #+BEGIN_SRC
+    git clone https://github.com/beldaphilippe/dotfiles.git ~/Downloads/dotfiles
+    mv ~/.config/emacs ~/.config/emacs.bak
+    cp -r ~/Downloads/dotfiles/emacs ~/.config
+#+END_SRC
+
+* Structure
+
+#+BEGIN_SRC
+  
+early-init.el
+init/
+    encoding.el
+    gui.el
+    package.el
+utils/
+    completion.el
+    evil.el
+    live-server.el
+    lsp.el
+    minibuffer.el
+    misc.el         // contains emacs behaviour config
+    modeline.el
+langs/
+    c.el
+    cpp.el
+    git.el
+    glsl.el
+    java.el
+    js.el
+    latex.el
+    lisp.el
+    markdown.el
+    nix.el
+    org.el
+    python.el
+    qml.el
+    rmd.el
+    rust.el
+    typst.el
+    utils.el
+    xml.el
+#+END_SRC
+
+* Generated directories/files
+When emacs is run with a certain configuration, it generates several directories and files. Here is their purposes.
+- `eln-cache/`: stores native-compiles files (.eln), which helps improve performance by allowing faster loading of Emacs Lisp code.
+- `elpa/`: contains source code for packages installed through elpa repository.
+- `custom.el`: contains the custom changes made mostly through GUI configuration.
+- `backups/`: contains file backups. 
+- `autosaves/`: contains file autosaves
+
+
+* TODO
+[ ] C-l support
+[ ] packages to check: consult, org-roam, vertico-posframe
+[ ] posframe minibuffer mode, fixed size of minibuffer (proportional to space available)
+[ ] fix hideshow multi fold/unfold
+[ ] org mode config
