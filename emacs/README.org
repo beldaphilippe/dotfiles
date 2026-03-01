@@ -19,7 +19,7 @@
     typescript-language-server # js and ts
 #+END_SRC
 - clone this repo to ~~/.config/emacs/~
-  #+BEGIN_SRC
+  #+BEGIN_SRC Bash
     git clone https://github.com/beldaphilippe/dotfiles.git ~/Downloads/dotfiles
     mv ~/.config/emacs ~/.config/emacs.bak
     cp -r ~/Downloads/dotfiles/emacs ~/.config
@@ -61,20 +61,22 @@ langs/
     typst.el
     utils.el
     xml.el
+ext/
+    extend-pattern.el
 #+END_SRC
 
 * Generated directories/files
 When emacs is run with a certain configuration, it generates several directories and files. Here is their purposes.
-- `eln-cache/`: stores native-compiles files (.eln), which helps improve performance by allowing faster loading of Emacs Lisp code.
-- `elpa/`: contains source code for packages installed through elpa repository.
-- `custom.el`: contains the custom changes made mostly through GUI configuration.
-- `backups/`: contains file backups. 
-- `autosaves/`: contains file autosaves
+- ~eln-cache/~: stores native-compiles files (.eln), which helps improve performance by allowing faster loading of Emacs Lisp code.
+- ~elpa/~: contains source code for packages installed through elpa repository.
+- ~custom.el~: contains the custom changes made mostly through GUI configuration.
+- ~backups/~: contains file backups. 
+- ~autosaves/~: contains file autosaves
 
 
 * TODO
-[ ] C-l support
-[ ] packages to check: consult, org-roam, vertico-posframe
-[ ] posframe minibuffer mode, fixed size of minibuffer (proportional to space available)
-[ ] fix hideshow multi fold/unfold
-[ ] org mode config
+- [ ] C-l support
+- [ ] packages to check: consult, org-roam, vertico-posframe
+- [ ] posframe minibuffer mode, fixed size of minibuffer (proportional to space available)
+- [ ] fix hideshow multi fold/unfold
+- [ ] org mode config

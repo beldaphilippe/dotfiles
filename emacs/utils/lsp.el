@@ -22,10 +22,13 @@
          (nix-ts-mode   . eglot-ensure)
          (java-ts-mode  . eglot-ensure)
          (c-ts-mode     . eglot-ensure)
-         (c++-ts-mode   . eglot-ensure)
+         (c++-ts-mode      . eglot-ensure)
          (typst-ts-mode . eglot-ensure)
          (latex-mode    . eglot-ensure)
          (js-mode       . eglot-ensure))
+  :config
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(c++-ts-mode . ("clangd" "--fallback-style=none")))
   )
 
 ;; syntax checking : errors and warnings

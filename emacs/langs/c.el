@@ -21,3 +21,10 @@
   (c++-mode-hook . irony-mode)
   (c-modeb-hook . irony-mode)
   (objc-mode-hook . irony-mode))
+
+
+;; (use-package c-ts-mode
+;;   :defer t
+;;   :config
+;;   (ts-add-lang 'c "https://github.com/tree-sitter/tree-sitter-c")
+;;   )
