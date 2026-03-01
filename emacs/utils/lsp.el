@@ -22,11 +22,19 @@
          (nix-ts-mode   . eglot-ensure)
          (java-ts-mode  . eglot-ensure)
          (c-ts-mode     . eglot-ensure)
-         (c++-ts-mode      . eglot-ensure)
+         (c++-ts-mode   . eglot-ensure)
          (typst-ts-mode . eglot-ensure)
          (latex-mode    . eglot-ensure)
          (js-mode       . eglot-ensure))
+  :custom
+  (eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
   :config
+  ;; disable inlay hints by default
+  ;; (add-hook 'eglot-managed-mode-hook
+  ;;           (lambda ()
+  ;;             (eglot-inlay-hints-mode -1)))
+
+  ;; disable clangd style by default (can be enabled with a .clang-format file)
   ;; (add-to-list 'eglot-server-programs
   ;;              '(c++-ts-mode . ("clangd" "--fallback-style=none")))
   )
