@@ -1,7 +1,6 @@
-(use-package python-mode
-  :ensure t
+(use-package python-ts-mode
   :defer t
-  :bind ("<f5>" . my/run)
+  :bind ("<f5>" . (lambda () (interactive) (my/run 'bg "python" nil)))
   )
 
 ;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
