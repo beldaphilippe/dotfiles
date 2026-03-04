@@ -8,7 +8,9 @@
  read-buffer-completion-ignore-case    t
  )
 
-(add-hook 'prog-mode-hook #'completion-preview-mode)
+;; completion preview mode only available in recent emacs versions
+(unless (version< emacs-version "30.1")
+  (add-hook 'prog-mode-hook #'completion-preview-mode))
 
 (use-package yasnippet
   :ensure t
