@@ -30,9 +30,9 @@
   (eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
   :config
   ;; disable inlay hints by default
-  ;; (add-hook 'eglot-managed-mode-hook
-  ;;           (lambda ()
-  ;;             (eglot-inlay-hints-mode -1)))
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (eglot-inlay-hints-mode -1)))
 
   ;; disable clangd style by default (can be enabled with a .clang-format file)
   ;; (add-to-list 'eglot-server-programs
