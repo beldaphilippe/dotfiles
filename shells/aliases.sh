@@ -14,3 +14,5 @@ alias gf="git fetch --prune"
 alias glog="git log --all --pretty --graph --oneline --decorate=auto"
 alias gs="git switch"
 alias gst="git status"
+
+unalias bat
