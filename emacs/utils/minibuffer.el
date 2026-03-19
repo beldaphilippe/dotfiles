@@ -23,7 +23,7 @@
 
 ;; displays the minibuffer at window center
 (use-package vertico-posframe
-  :disabled t
+  ;; :disabled t
   :ensure t
   :init
   (setq vertico-posframe-parameters   '((left-fringe  . 12)    ;; Fringes
