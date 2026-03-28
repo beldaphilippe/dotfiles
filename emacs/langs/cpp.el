@@ -10,7 +10,7 @@
 
 (use-package cmake-ts-mode
   :defer t
-  :mode ("CMake\\.txt\\'")
+  :mode ("CMakeLists\\.txt\\'")
   :config
   (ts-add-lang 'cmake "https://github.com/uyha/tree-sitter-cmake")
   )

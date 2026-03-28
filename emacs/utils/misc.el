@@ -14,6 +14,7 @@
 
 ;; extend pattern on visual line ---
 (use-package extend-pattern
+  :disabled t
   :ensure nil
   :load-path "../ext"
   :hook (prog-mode . extend-pattern-mode))

@@ -159,6 +159,7 @@
 ;; (load-theme 'gruvbox :no-confirm)
 
 (use-package doom-themes
+  :disabled t
   :ensure t
   :custom
   ;; Global settings (defaults)
@@ -209,6 +210,11 @@
 
   ;; (add-hook 'server-after-make-frame-hook #'my/load-theme-on-gui)
   )
+
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-everforest-dark-hard t))
 
 ;; add a border ---
 (use-package spacious-padding
