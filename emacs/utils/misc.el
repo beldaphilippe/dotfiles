@@ -12,6 +12,10 @@
 (setq-default display-fill-column-indicator-character ?│) ; use a thin vertical bar
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)  ; display a visual line at <fill-column> characters
 
+;; git ---
+(use-package magit
+  :ensure t)
+
 ;; extend pattern on visual line ---
 (use-package extend-pattern
   :disabled t
