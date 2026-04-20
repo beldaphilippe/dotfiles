@@ -61,3 +61,9 @@
 (use-package olivetti
   :ensure t
   :hook (org-mode . olivetti-mode))
+
+;; mermaid
+(use-package ob-mermaid
+  :ensure t
+  :config
+  (setq ob-mermaid-cli-path "/usr/bin/nv mmdc"))
