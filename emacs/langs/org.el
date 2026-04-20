@@ -5,9 +5,21 @@
          (org-modern-mode . olivetti-mode)
          (org-modern-mode . org-toggle-inline-images)
          (org-modern-mode . visual-line-mode)
+
+         ;; to update images after code block execution
+         (org-babel-after-execute . org-display-inline-images))
          )
   :config
   (setq org-pretty-entities t)
+  (setq org-confirm-babel-evaluate nil) ; do not ask confirmation when executing code block
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((mermaid . t)
+     (emacs-lisp . t)
+     )
+   )
+
 
   ;; ;; Resize Org headings
   ;; (dolist (face '((org-level-1 . 1.35)
@@ -66,4 +78,5 @@
 (use-package ob-mermaid
   :ensure t
   :config
-  (setq ob-mermaid-cli-path "/usr/bin/nv mmdc"))
+  ;; (setq ob-mermaid-cli-path "/usr/bin/env mmdc"))
+  (setq ob-mermaid-cli-path "mmdc"))
