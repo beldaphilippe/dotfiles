@@ -34,10 +34,10 @@
             (lambda ()
               (eglot-inlay-hints-mode -1)))
 
-  ;; disable clangd style by default (can be enabled with a .clang-format file)
-  ;; (add-to-list 'eglot-server-programs
-  ;;              '(c++-ts-mode . ("clangd" "--fallback-style=none")))
-  )
+  (add-to-list 'eglot-server-programs
+               ;; '(c++-ts-mode . ("clangd" "--fallback-style=none"))   ;; disable clangd style by default (can be enabled with a .clang-format file)
+               '(typst-ts-mode . ("tinymist")))
+)
 
 ;; syntax checking : errors and warnings
 (use-package flycheck
