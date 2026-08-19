@@ -104,7 +104,7 @@ Keeps commas attached to the preceding field."
   :defer t
   ;; :hook
   ;; (prog-mode . (lambda ()
-  ;;                (unless (derived-mode-p 'emacs-lisp-mode
+  ;;                ( (derived-mode-p 'emacs-lisp-mode
   ;;                                        'nix-ts-mode)
   ;;                  (highlight-indent-guides-mode 1))))
   :custom
@@ -122,6 +122,18 @@ Keeps commas attached to the preceding field."
   :ensure t
   :config
   (global-anzu-mode))
+
+(defun isearch-with-region ()
+  "Use region as the isearch text."
+  (when mark-active
+    (let ((region (funcall region-extract-function nil)))
+      (deactivate-mark)
+      (isearch-push-state)
+      (isearch-yank-string region))))
+
+(add-hook 'isearch-mode-hook #'isearch-with-region)
+
+
 
 
 ;; (defun rename-current-buffer-file ()

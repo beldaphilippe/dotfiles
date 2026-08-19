@@ -23,6 +23,7 @@
          (java-ts-mode  . eglot-ensure)
          (c-ts-mode     . eglot-ensure)
          (c++-ts-mode   . eglot-ensure)
+         (glsl-mode     . eglot-ensure)
          (typst-ts-mode . eglot-ensure)
          (latex-mode    . eglot-ensure)
          (js-mode       . eglot-ensure))
@@ -36,7 +37,8 @@
 
   (add-to-list 'eglot-server-programs
                ;; '(c++-ts-mode . ("clangd" "--fallback-style=none"))   ;; disable clangd style by default (can be enabled with a .clang-format file)
-               '(typst-ts-mode . ("tinymist")))
+               '(typst-ts-mode . ("tinymist"))
+               '(glsl-mode . ("glsl_analyzer")))
 )
 
 ;; syntax checking : errors and warnings

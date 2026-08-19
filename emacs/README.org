@@ -14,6 +14,7 @@
     nixd                       # nix
     java-language-server       # java
     ccls                       # c/c++ powered by clang
+    glsl_analyzer              # glsl
     tinymist                   # typst
     texlab                     # latex
     typescript-language-server # js and ts
@@ -80,3 +81,4 @@ When emacs is run with a certain configuration, it generates several directories
 - [ ] posframe minibuffer mode, fixed size of minibuffer (proportional to space available)
 - [ ] fix hideshow multi fold/unfold
 - [ ] org mode config
+- [ ] glsl: auto formatting on save, popups on keybind to doc, errors highlighted
