@@ -27,18 +27,19 @@
          (typst-ts-mode . eglot-ensure)
          (latex-mode    . eglot-ensure)
          (js-mode       . eglot-ensure))
-  :custom
-  (eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
+  ;; :custom
+  ;; (eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
   :config
   ;; disable inlay hints by default
   (add-hook 'eglot-managed-mode-hook
             (lambda ()
               (eglot-inlay-hints-mode -1)))
 
-  (add-to-list 'eglot-server-programs
-               ;; '(c++-ts-mode . ("clangd" "--fallback-style=none"))   ;; disable clangd style by default (can be enabled with a .clang-format file)
-               '(typst-ts-mode . ("tinymist"))
-               '(glsl-mode . ("glsl_analyzer")))
+  (dolist (lsp-entries '((typst-ts-mode . ("tinymist"))
+                         (python-mode . ("pyright"))
+                         (nix-ts-mode . ("nixd"))
+                         (glsl-mode . ("glsl_analyzer"))))
+    (add-to-list 'eglot-server-programs lsp-entries))
 )
 
 ;; syntax checking : errors and warnings

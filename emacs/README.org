@@ -10,7 +10,7 @@
 #+END_SRC
 - Install some language servers for eglot:
   #+BEGIN_SRC
-    pyright                    # python
+    python-lsp-server          # python
     nixd                       # nix
     java-language-server       # java
     ccls                       # c/c++ powered by clang
