@@ -36,11 +36,15 @@
               (eglot-inlay-hints-mode -1)))
 
   (dolist (lsp-entries '((typst-ts-mode . ("tinymist"))
-                         (python-mode . ("pyright"))
+                         (python-mode . ("pylsp"))
                          (nix-ts-mode . ("nixd"))
                          (glsl-mode . ("glsl_analyzer"))))
     (add-to-list 'eglot-server-programs lsp-entries))
-)
+  (setq-default eglot-workspace-configuration
+                '(:pylsp (:plugins (:autopep8    (:enabled :json-false)
+                                                 :yapf       (:enabled :json-false)
+                                                 :pylsp_black (:enabled t)))))
+  )
 
 ;; syntax checking : errors and warnings
 (use-package flycheck

@@ -8,9 +8,10 @@
 
          ;; to update images after code block execution
          (org-babel-after-execute . org-display-inline-images))
-         )
+
   :config
   (setq org-pretty-entities t)
+  (setq org-hide-emphasis-markers t)
   (setq org-confirm-babel-evaluate nil) ; do not ask confirmation when executing code block
 
   (org-babel-do-load-languages
