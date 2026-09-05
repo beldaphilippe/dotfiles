@@ -10,10 +10,10 @@
 #+END_SRC
 - Install some language servers for eglot:
   #+BEGIN_SRC
-    python-lsp-server          # python
+    python-lsp-server          # python, add extensions for linters, ...
     nixd                       # nix
     java-language-server       # java
-    ccls                       # c/c++ powered by clang
+    clang-tools                # c/c++
     glsl_analyzer              # glsl
     tinymist                   # typst
     texlab                     # latex
@@ -25,6 +25,18 @@
     mv ~/.config/emacs ~/.config/emacs.bak
     cp -r ~/Downloads/dotfiles/emacs ~/.config
 #+END_SRC
+
+* Keybindings
+
+| Keybinding    | Effect                         |
+|               |                                |
+|---------------+--------------------------------|
+| M-.           | Go to symbol definition        |
+| C-x C-SPACE   | Go to previous cursor position |
+| C-ù           | Go to matching parenthesis     |
+| M-g M-g X RET | Go to line X                   |
+| C-x C-;       | Comment/uncomment line         |
+| M-;           | Comment/uncomment region       |
 
 * Structure
 
@@ -69,7 +81,7 @@ ext/
 * Generated directories/files
 When emacs is run with a certain configuration, it generates several directories and files. Here is their purposes.
 - ~eln-cache/~: stores native-compiles files (.eln), which helps improve performance by allowing faster loading of Emacs Lisp code.
-- ~elpa/~: contains source code for packages installed through elpa repository.
+- ~elp(test)a/~: contains source code for packages installed through elpa repository.
 - ~custom.el~: contains the custom changes made mostly through GUI configuration.
 - ~backups/~: contains file backups. 
 - ~autosaves/~: contains file autosaves

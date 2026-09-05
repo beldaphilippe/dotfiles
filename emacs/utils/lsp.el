@@ -58,3 +58,9 @@
   :config
   (global-flycheck-eglot-mode 1)
   )
+
+;; support for direnv
+(use-package envrc
+  :ensure t
+  :hook (after-init . envrc-global-mode)
+  )

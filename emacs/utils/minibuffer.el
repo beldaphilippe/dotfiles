@@ -26,12 +26,22 @@
   ;; :disabled t
   :ensure t
   :init
-  (setq vertico-posframe-parameters   '((left-fringe  . 12)    ;; Fringes
+  (setq vertico-posframe-parameters   `((left-fringe  . 12)    ;; Fringes
                                         (right-fringe . 12)
-                                        (undecorated  . nil))) ;; Rounded frame
+                                        ))
+                                        ;; (cursor-color . ,(face-attribute 'cursor :background nil t))))
+  ;; (setq vertico-posframe-parameters
+  ;;       `((left-fringe  . 12)
+  ;;         (right-fringe . 12)
+  ;;         ;; Make the child frame use the same cursor color as the
+  ;;         ;; currently selected frame.
+  ;;         (cursor-color . ,(face-attribute 'cursor :background
+  ;;                                          (selected-frame)
+  ;;                                          t))))
+
   :config
   (vertico-posframe-mode 1)
-  (setq vertico-posframe-width        96                       ;; Narrow frame
+  (setq ;vertico-posframe-width        96                       ;; Narrow frame
         vertico-posframe-height       vertico-count            ;; Default height
         ;; Don't create posframe for these commands
         vertico-multiform-commands    '((consult-line    (:not posframe))
