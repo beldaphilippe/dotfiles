@@ -214,7 +214,10 @@
 (use-package base16-theme
   :ensure t
   :config
-  (load-theme 'base16-everforest-dark-hard t))
+  ;; (load-theme 'base16-everforest-dark-hard t)
+  (load-theme 'base16-precious-light-warm t)
+  ;; (load-theme 'base16-papercolor-light t)
+  )
 
 ;; add a border ---
 (use-package spacious-padding

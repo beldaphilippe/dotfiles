@@ -93,7 +93,7 @@ Keeps commas attached to the preceding field."
 
 ;; management of GC ---
 (use-package gcmh
-  :disabled t
+  ;; :disabled t
   :ensure t
   :config
   (gcmh-mode 1))
@@ -178,15 +178,8 @@ Keeps commas attached to the preceding field."
 (setq-default tab-width 4
               indent-tabs-mode nil)
 
-;; centers text ---
-(use-package olivetti
-  :defer t
-  :config
-  (setq olivetti-style t))
-
 ;; folds ---
 (use-package hideshow
-  :ensure t
   :hook (prog-mode . hs-minor-mode)
   :config
   (setq hs-hide-comments-when-hiding-all nil)
@@ -234,24 +227,10 @@ Keeps commas attached to the preceding field."
               ("C-<tab>" . hs-toggle-hiding)
               ("C-<iso-lefttab>" . hs-cycle-current-level)))
 
-;; (use-package hideshow
-;;   :ensure t
-;;   :config
-;;   (setq hs-hide-comments-when-hiding-all nil)
-;;   (setq hs-isearch-open t)
-;;   (defun hs-global-cycle ()
-;;     (interactive)
-;;     (pcase last-command
-;;       ('hs-global-cycle
-;;        (save-excursion (hs-show-all))
-;;        (setq this-command 'hs-global-show))
-;;       (_ (hs-hide-all))))
-;;   :hook ((find-file-mode . hs-minor-mode)
-;; 	 (prog-mode . hs-minor-mode))
-;; 	 ;; (hs-minor-mode . hs-hide-all))
-;;   :bind (:map hs-minor-mode-map
-;; 			  ("C-<tab>" . hs-toggle-hiding)
-;; 			  ("C-<iso-lefttab>" . hs-global-cycle)))
+(defun my-goto-definition (event)
+  (interactive "e")
+  (mouse-set-point event)
+  (call-interactively #'xref-find-definitions))
 
 ;; key bindings ---
 
@@ -259,7 +238,10 @@ Keeps commas attached to the preceding field."
 (global-set-key (kbd "C-x b") 'consult-buffer)          ;; replace string
 (global-set-key (kbd "C-x C-b") 'consult-buffer)        ;; avoid fat fingers
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
-(global-set-key (kbd "C-c h") 'replace-string)          ;; replace string
+(global-set-key (kbd "<C-down-mouse-1>") #'ignore)      ;; remove binding
+(define-key prog-mode-map (kbd "<C-mouse-1>") #'my-goto-definition) ;; go to symbol definition
+(global-set-key (kbd "C-c h") 'replace-string)                         ;; replace string
+(global-set-key (kbd "C-S-f") 'consult-grep)
 (global-set-key [M-right] 'forward-sexp)
 (global-set-key [M-left] 'backward-sexp)
 (global-set-key (kbd "C-x t") 'treemacs)         ;; toggle treemacs

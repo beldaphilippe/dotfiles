@@ -2,7 +2,6 @@
   :ensure t
   :defer t
   :hook ((org-mode . org-modern-mode)
-         (org-modern-mode . olivetti-mode)
          (org-modern-mode . org-toggle-inline-images)
          (org-modern-mode . visual-line-mode)
 

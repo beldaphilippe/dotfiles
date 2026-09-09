@@ -15,15 +15,6 @@
 (setq-default c-basic-offset 4)
 (setq-default c-ts-mode-indent-offset 4)
 
-(use-package irony
-  :ensure t
-  :defer t
-  :hook
-  (c++-mode-hook . irony-mode)
-  (c-modeb-hook . irony-mode)
-  (objc-mode-hook . irony-mode))
-
-
 ;; (use-package c-ts-mode
 ;;   :defer t
 ;;   :config
