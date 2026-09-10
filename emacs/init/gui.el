@@ -145,8 +145,18 @@
                                                 'relative
                                               'absolute)
                   display-line-numbers 1)))
-;; default line number width to 3 to avoid jumping
-(setq-default display-line-numbers-width 3)
+
+(setq-default display-line-numbers-width 3) ;; default line number width to 3 to avoid jumping
+;; add hook to resist theme change
+(add-hook 'after-init-hook
+          (lambda ()
+;;             ;; (set-face-attribute 'line-number nil
+;;                                 ;; :background (face-attribute 'highlight :background nil t)
+;;                                 ;; :foreground (face-attribute 'font-lock-comment-face :foreground nil t))
+            (set-face-attribute 'line-number-current-line nil
+;;                                 ;; :background (face-attribute 'highlight :background nil t)
+;;                                 :foreground (face-attribute 'default :foreground nil t)
+                                :weight 'bold)))
 
 ;; themes ---
 
