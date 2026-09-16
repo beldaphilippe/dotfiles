@@ -3,6 +3,10 @@
   :bind ("<f5>" . (lambda () (interactive) (my/run 'bg "python" nil)))
   )
 
+(setq-default eglot-workspace-configuration
+  '(:pylsp (:plugins (:pyflakes_ruff (:enabled t)
+                      :ruff (:enabled t :formatEnabled t)))))
+
 ;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
 ;; (ts-add-lang 'python "https://github.com/tree-sitter/py-tree-sitter/releases/tag/v0.23.2")
 ;; (ts-add-lang 'python "https://github.com/tree-sitter/tree-sitter-python/releases/tag/v0.23.3")
