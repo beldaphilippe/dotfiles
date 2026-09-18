@@ -1,45 +1,19 @@
 ;; -*- lexical-binding: t; -*-
 
-;; (require 'mardown-mode)
-;; (require 'yasnippet)
-
-;; (use-package lsp-bridge
-;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
-;;             :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-;;             :build (:not compile))
-;;   :init
-;;   (global-lsp-bridge-mode)
-;;   :config
-;;   (setq
-;;    ;; lsp-bridge-python-multi-lsp-server "basedpyright_ruff"
-;;    lsp-bridge-enable-hover-diagnostic t
-;;    )
-;;   )
-
 ;; builtin
 (use-package eglot
-  :hook ((python-mode   . eglot-ensure)
-         (nix-ts-mode   . eglot-ensure)
-         (java-ts-mode  . eglot-ensure)
-         (c-ts-mode     . eglot-ensure)
-         (c++-ts-mode   . eglot-ensure)
-         (glsl-mode     . eglot-ensure)
-         (typst-ts-mode . eglot-ensure)
-         (latex-mode    . eglot-ensure)
-         (js-mode       . eglot-ensure))
   ;; :custom
   ;; (eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
   :config
+  ;; format buffer on save
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+
   ;; disable inlay hints by default
   (add-hook 'eglot-managed-mode-hook
             (lambda ()
               (eglot-inlay-hints-mode -1)))
-
-  (dolist (lsp-entries '((typst-ts-mode . ("tinymist"))
-                         (python-mode . ("pylsp"))
-                         (nix-ts-mode . ("nixd"))
-                         (glsl-mode . ("glsl_analyzer"))))
-    (add-to-list 'eglot-server-programs lsp-entries))
   )
 
 ;; syntax checking : errors and warnings

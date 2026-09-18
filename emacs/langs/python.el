@@ -1,11 +1,15 @@
-(use-package python-ts-mode
+(use-package python-mode
   :defer t
   :bind ("<f5>" . (lambda () (interactive) (my/run 'bg "python" nil)))
-  )
+  :hook (python-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '(python-mode . ("pylsp")))
+  (setq-default eglot-workspace-configuration
+    (append eglot-workspace-configuration
+            '(:pylsp (:plugins (:pyflakes_ruff (:enabled t)
+                                :ruff (:enabled t :formatEnabled t)))))))
 
-(setq-default eglot-workspace-configuration
-  '(:pylsp (:plugins (:pyflakes_ruff (:enabled t)
-                      :ruff (:enabled t :formatEnabled t)))))
+  )
 
 ;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
 ;; (ts-add-lang 'python "https://github.com/tree-sitter/py-tree-sitter/releases/tag/v0.23.2")

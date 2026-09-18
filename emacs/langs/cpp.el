@@ -1,6 +1,7 @@
 ;; c++-ts-mode packaged with emacs
 (use-package c++-ts-mode
   :defer t
+  :hook (c++-ts-mode . eglot-ensure)
   :mode ("\\.cpp\\'" "\\.c++\\'" "\\.cxx\\'" "\\.hpp\\'" "\\.hxx\\'" "\\.tpp\\'" "\\.txx\\'""\\.ipp\\'" "\\.ixx\\'")
   :config
   ;; dont know why but c grammar needed

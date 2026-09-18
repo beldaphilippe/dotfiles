@@ -7,13 +7,13 @@
   (interactive)
   (require 'treesit)
 
-  ;; Add nix grammar if not yet already assigned
+  ;; Add LANGUAGE grammar if not yet already assigned
   (unless (assoc language treesit-language-source-alist)
     (add-to-list
      'treesit-language-source-alist
      `(,language ,grammar-path ,branch ,subdir)))
 
-  ;; Only install Nix grammar if not already installed
+  ;; Only install LANGUAGE grammar if not already installed
   (unless (treesit-language-available-p language)
     (treesit-install-language-grammar language))
   )

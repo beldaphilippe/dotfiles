@@ -17,6 +17,7 @@
 
 ;; (use-package c-ts-mode
 ;;   :defer t
+;;   :hook (c-ts-mode . eglot-ensure)
 ;;   :config
 ;;   (ts-add-lang 'c "https://github.com/tree-sitter/tree-sitter-c")
 ;;   )

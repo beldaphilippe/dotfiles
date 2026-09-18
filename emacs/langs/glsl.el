@@ -2,9 +2,13 @@
 (use-package glsl-mode
   :ensure t
   :defer t
+  :hook (glsl-mode . eglot-ensure)
   :bind (:map glsl-mode-map
               ("<f5>"   . (lambda () (interactive) (my/make-compile nil nil "shaders")))
               ("<S-f5>" . (lambda () (interactive) (my/make-compile nil t   "shaders")))
               ("<f6>"   . (lambda () (interactive) (my/make-run (format "FRAG_SHADER_PATH=%s" buffer-file-name) nil "shaders")))
               ("<S-f6>" . (lambda () (interactive) (my/make-run (format "FRAG_SHADER_PATH=%s" buffer-file-name) t   "shaders"))))
-  :mode ("\\.\\(frag\\|vert\\)\\'" . glsl-mode))
+  :mode ("\\.\\(frag\\|vert\\)\\'" . glsl-mode)
+  :config
+  (add-to-list 'eglot-server-programs '(glsl-mode . ("glsl_analyzer")))
+  )

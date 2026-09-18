@@ -1,8 +1,10 @@
 (use-package nix-ts-mode
   :ensure t
   :defer t
+  :hook (nix-ts-mode . eglot-ensure)
   :config
   (ts-add-lang 'nix "https://github.com/nix-community/tree-sitter-nix")
+  (add-to-list 'eglot-server-programs '(nix-ts-mode . ("nixd")))
 
   (defun my/run-nix-develop (shell-buffer nix-shell-name)
   "Run 'nix develop NIX-SHELL-NAME' in the given SHELL-BUFFER.
