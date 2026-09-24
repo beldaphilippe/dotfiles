@@ -232,6 +232,13 @@ Keeps commas attached to the preceding field."
   (mouse-set-point event)
   (call-interactively #'xref-find-definitions))
 
+;; multi cursors ---
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (define-key mc/keymap (kbd "<return>") nil)
+  )
+
 ;; key bindings ---
 
 (global-set-key (kbd "M-i") 'indent-relative)           ;;  indent-relative
@@ -240,8 +247,12 @@ Keeps commas attached to the preceding field."
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "<C-down-mouse-1>") #'ignore)      ;; remove binding
 (define-key prog-mode-map (kbd "<C-mouse-1>") #'my-goto-definition) ;; go to symbol definition
-(global-set-key (kbd "C-c h") 'replace-string)                         ;; replace string
-(global-set-key (kbd "C-S-f") 'consult-grep)
+(global-unset-key (kbd "M-<down-mouse-1>"))
+(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click) ; add new cursors (C-g to return to 1 cursor)
+(global-unset-key (kbd "C-x n"))
+(global-set-key (kbd "C-x C-n") 'mc/mark-next-like-this) ; add a new cursor on the line under
+(global-set-key (kbd "C-c h") 'replace-string)                      ;; replace string
+(global-set-key (kbd "C-S-s") 'consult-grep)                        ;; project-level pattern search
 (global-set-key [M-right] 'forward-sexp)
 (global-set-key [M-left] 'backward-sexp)
 (global-set-key (kbd "C-x t") 'treemacs)         ;; toggle treemacs

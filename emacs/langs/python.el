@@ -19,6 +19,5 @@
 ;;   :ensure t
 ;;   :defer t
 ;;   :config
-;;   (ts-add-lang 'python "https://github.com/tree-sitter/tree-sitter-python/releases/tag/v0.23.3")
-
+;;   (ts-add-lang 'python "https://github.com/tree-sitter/tree-sitter-python/releases/tag/v0.23.3" nil nil t)
 ;;   :mode "\\.py\\'")

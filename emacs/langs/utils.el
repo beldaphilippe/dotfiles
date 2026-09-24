@@ -2,7 +2,7 @@
 ;; Useful functions concerning languages
 
 ;; tree-sitter ---
-(defun ts-add-lang (language grammar-path &optional branch subdir)
+(defun ts-add-lang (language grammar-path &optional branch subdir force)
   "Add LANGUAGE grammar GRAMMAR-PATH to treesitter list, and install if not yet available."
   (interactive)
   (require 'treesit)
@@ -14,7 +14,9 @@
      `(,language ,grammar-path ,branch ,subdir)))
 
   ;; Only install LANGUAGE grammar if not already installed
-  (unless (treesit-language-available-p language)
+  ;; (unless (treesit-language-available-p language)
+    ;; (treesit-install-language-grammar language))
+   (when (or force (not (treesit-language-available-p language)))
     (treesit-install-language-grammar language))
   )
 
