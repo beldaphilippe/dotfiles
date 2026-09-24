@@ -1,6 +1,8 @@
 alias ll="ls -lAh --color=auto"
 alias l="ll"
-alias bat="batcat"
+dud() {
+    du -ah -d 1 "${@:-.}" | sort -h
+}
 
 # emacs
 alias ec="(emacsclient -c > /dev/null) || ((emacs --daemon > /dev/null) && emacsclient -c)"
@@ -14,5 +16,3 @@ alias gf="git fetch --prune"
 alias glog="git log --all --pretty --graph --oneline --decorate=auto"
 alias gs="git switch"
 alias gst="git status"
-
-unalias bat
