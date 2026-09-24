@@ -247,6 +247,8 @@ Keeps commas attached to the preceding field."
 (global-set-key (kbd "C-ù") 'goto-matching-parenthesis) ;; go to matching parenthesis
 (global-set-key (kbd "<C-down-mouse-1>") #'ignore)      ;; remove binding
 (define-key prog-mode-map (kbd "<C-mouse-1>") #'my-goto-definition) ;; go to symbol definition
+(define-key prog-mode-map (kbd "<mouse-8>") 'xref-go-back) ;; go back from symbol definition
+(define-key prog-mode-map (kbd "<mouse-9>") 'xref-go-forward)
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click) ; add new cursors (C-g to return to 1 cursor)
 (global-unset-key (kbd "C-x n"))
