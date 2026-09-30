@@ -139,13 +139,6 @@
 
 ;; line numbers ---
 ;; display lines numbers (relative for vim bindings and absolute for emacs bindings)
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (setq display-line-numbers-type (if (bound-and-true-p evil-mode)
-                                                'relative
-                                              'absolute)
-                  display-line-numbers 1)))
-
 (setq-default display-line-numbers-width 3) ;; default line number width to 3 to avoid jumping
 ;; add hook to resist theme change
 (add-hook 'after-init-hook
@@ -157,6 +150,11 @@
 ;;                                 ;; :background (face-attribute 'highlight :background nil t)
 ;;                                 :foreground (face-attribute 'default :foreground nil t)
                                 :weight 'bold)))
+(defun my/enable-line-numbers ()
+  (setq-local display-line-numbers-type
+              (if (bound-and-true-p evil-mode) 'relative 'absolute))
+  (display-line-numbers-mode 1))
+(add-hook 'prog-mode-hook #'my/enable-line-numbers)
 
 ;; themes ---
 

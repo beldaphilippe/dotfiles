@@ -2,7 +2,9 @@
   :ensure t
   :defer t
   :hook ((typst-ts-mode . eglot-ensure)
-         (typst-ts-mode . hs-minor-mode))
+         (typst-ts-mode . hs-minor-mode)
+         (typst-ts-mode . my/enable-line-numbers)
+         )
   :custom (typst-ts-indent-offset 2)
   :config
   (ts-add-lang 'typst "https://github.com/uben0/tree-sitter-typst")

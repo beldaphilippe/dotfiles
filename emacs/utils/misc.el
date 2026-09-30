@@ -17,14 +17,18 @@
 
 ;; git ---
 (use-package magit
-  :ensure t)
+    :ensure t)
+
+(use-package editorconfig
+    :config
+  (editorconfig-mode 1))
 
 ;; extend pattern on visual line ---
 (use-package extend-pattern
-  :disabled t
-  :ensure nil
-  :load-path "../ext"
-  :hook (prog-mode . extend-pattern-mode))
+    :disabled t
+    :ensure nil
+    :load-path "../ext"
+    :hook (prog-mode . extend-pattern-mode))
 
 ;; open URLs in the default web browser (not EWW) using XDG's utilace
 (setq-default  browse-url-generic-program "xdg-open")
@@ -46,7 +50,7 @@
 (setq electric-pair-pairs
       (append electric-pair-pairs
               '((?\{ . ?\}))))
-                ;; (?' . ?'))))
+;; (?' . ?'))))
 
 (defun goto-matching-parenthesis (arg)
   "Go to the matching parenthesis."
@@ -70,7 +74,7 @@
 (setq-default align-default-spacing 1)
 
 (defun align-regexp-repeat (beg end regexp
-                               &optional group spacing)
+                            &optional group spacing)
   "Wrapper for align-regexp with repeat."
   (interactive
    (list (region-beginning)
@@ -93,35 +97,35 @@ Keeps commas attached to the preceding field."
 
 ;; management of GC ---
 (use-package gcmh
-  ;; :disabled t
-  :ensure t
-  :config
-  (gcmh-mode 1))
+    ;; :disabled t
+    :ensure t
+    :config
+    (gcmh-mode 1))
 
 ;; indentation guides ---
 (use-package highlight-indent-guides
-  :ensure t
-  :defer t
-  ;; :hook
-  ;; (prog-mode . (lambda ()
-  ;;                ( (derived-mode-p 'emacs-lisp-mode
-  ;;                                        'nix-ts-mode)
-  ;;                  (highlight-indent-guides-mode 1))))
-  :custom
-  (highlight-indent-guides-delay 0)     ; time to wait before refreshing
-  (highlight-indent-guides-auto-enabled t)
-  (highlight-indent-guides-responsive 'top)
-  
-  (highlight-indent-guides-method 'character)
-  (highlight-indent-guides-auto-character-face-perc 30)
-  (highlight-indent-guides-auto-top-character-face-perc 100)
-  )
+    :ensure t
+    :defer t
+    ;; :hook
+    ;; (prog-mode . (lambda ()
+    ;;                ( (derived-mode-p 'emacs-lisp-mode
+    ;;                                        'nix-ts-mode)
+    ;;                  (highlight-indent-guides-mode 1))))
+    :custom
+    (highlight-indent-guides-delay 0)     ; time to wait before refreshing
+    (highlight-indent-guides-auto-enabled t)
+    (highlight-indent-guides-responsive 'top)
+
+    (highlight-indent-guides-method 'character)
+    (highlight-indent-guides-auto-character-face-perc 30)
+    (highlight-indent-guides-auto-top-character-face-perc 100)
+    )
 
 ;; nombre de match pour les recherches C-s affiché dans la modeline ---
 (use-package anzu
-  :ensure t
-  :config
-  (global-anzu-mode))
+    :ensure t
+    :config
+    (global-anzu-mode))
 
 (defun isearch-with-region ()
   "Use region as the isearch text."
@@ -141,35 +145,35 @@ Keeps commas attached to the preceding field."
   "Renames current buffer and file it is visiting."
   (interactive)
   (let* ((name (buffer-name))
-        (filename (buffer-file-name))
-        (basename (file-name-nondirectory filename)))
+         (filename (buffer-file-name))
+         (basename (file-name-nondirectory filename)))
     (if (not (and filename (file-exists-p filename)))
         (error "Buffer '%s' is not visiting a file!" name)
-      (let ((new-name (read-file-name "New name: " (file-name-directory filename) basename nil basename)))
-        (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!" new-name)
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)
-          (message "File '%s' successfully renamed to '%s'"
-                   name (file-name-nondirectory new-name)))))))
+        (let ((new-name (read-file-name "New name: " (file-name-directory filename) basename nil basename)))
+          (if (get-buffer new-name)
+              (error "A buffer named '%s' already exists!" new-name)
+              (rename-file filename new-name 1)
+              (rename-buffer new-name)
+              (set-visited-file-name new-name)
+              (set-buffer-modified-p nil)
+              (message "File '%s' successfully renamed to '%s'"
+                       name (file-name-nondirectory new-name)))))))
 
 ;; trailing whitespaces ---
 (use-package ws-butler
-  :ensure t
-  :hook (prog-mode . ws-butler-mode)
-  :custom
-  ;; Only trim whitespace outside of string literals
-  (ws-butler-trim-predicate
-   (lambda (beg end)
-     "Trim whitespace only if region is not part of a string."
-     (not (eq 'font-lock-string-face
-              (get-text-property end 'face)))))
+    :ensure t
+    :hook (prog-mode . ws-butler-mode)
+    :custom
+    ;; Only trim whitespace outside of string literals
+    (ws-butler-trim-predicate
+     (lambda (beg end)
+       "Trim whitespace only if region is not part of a string."
+       (not (eq 'font-lock-string-face
+                (get-text-property end 'face)))))
 
-  ;; Optional: preserve whitespace before point
-  ;; (ws-butler-keep-whitespace-before-point t)
-  )
+    ;; Optional: preserve whitespace before point
+    ;; (ws-butler-keep-whitespace-before-point t)
+    )
 
 ;; adding new line at the end of file ---
 (setq-default require-final-newline t)
@@ -180,52 +184,35 @@ Keeps commas attached to the preceding field."
 
 ;; folds ---
 (use-package hideshow
-  :hook (prog-mode . hs-minor-mode)
-  :config
-  (setq hs-hide-comments-when-hiding-all nil)
-  (setq hs-isearch-open t)
+    :hook (prog-mode . hs-minor-mode)
+    :config
+    (setq hs-hide-comments-when-hiding-all nil)
+    (setq hs-isearch-open t)
 
-  ;; Cycle inside the current nesting level
-  (defun hs-cycle-current-level ()
-    "Cycle hideshow states at the current nesting level."
-    (interactive)
-    (save-excursion
-      ;; Move to beginning of current block or stay where we are
-      (let* ((initial-point (point))
-             (block-start (progn
-                            (ignore-errors (hs-find-block-beginning))
-                            (point)))
-             (command (if (eq last-command 'hs-cycle-current-level)
-                          this-command
-                        'start)))
+    (defun my/hs--block-bounds ()
+      "Return (BEG . END) of the block enclosing point, or the whole buffer."
+      (save-excursion
+        (if (hs-find-block-beginning)
+            (let ((beg (match-beginning 0)))
+              (goto-char beg)
+              (funcall hs-forward-sexp-func 1)
+              (cons beg (point)))
+            (cons (point-min) (point-max)))))
 
-        (pcase command
-          ;; First call → toggle this block normally
-          ('start
-           (hs-toggle-hiding)
-           (setq this-command 'hs-cycle-current-level))
+    (defun my/hs-toggle-level-at-point (level)
+      "If any fold exists in the current block, show them all; else hide LEVEL."
+      (interactive "p")
+      (pcase-let ((`(,beg . ,end) (my/hs--block-bounds)))
+        (if (seq-some (lambda (ov) (overlay-get ov 'hs))
+                      (overlays-in beg end))
+            (save-restriction
+              (narrow-to-region beg end)
+              (hs-show-all))
+            (hs-hide-level level))))
 
-          ;; Second call → hide children inside this block
-          ('hs-cycle-current-level
-           (goto-char block-start)
-           (hs-hide-level 1))
-
-          ;; Third call → show this block
-          ('hs-cycle-current-level
-           (goto-char block-start)
-           (hs-show-block))
-
-          ;; Fourth call → show everything in this nesting level
-          ('hs-cycle-current-level
-           (goto-char block-start)
-           (hs-show-level 1))))))
-
-  ;; Replace your old hs-global-cycle binding here
-  ;; :hook ((find-file . hs-minor-mode)
-  ;;        (prog-mode . hs-minor-mode))
-  :bind (:map hs-minor-mode-map
-              ("C-<tab>" . hs-toggle-hiding)
-              ("C-<iso-lefttab>" . hs-cycle-current-level)))
+    :bind (:map hs-minor-mode-map
+                ("C-<tab>" . hs-toggle-hiding)
+                ("C-<iso-lefttab>" .   my/hs-toggle-level-at-point)))
 
 (defun my-goto-definition (event)
   (interactive "e")
@@ -234,10 +221,10 @@ Keeps commas attached to the preceding field."
 
 ;; multi cursors ---
 (use-package multiple-cursors
-  :ensure t
-  :config
-  (define-key mc/keymap (kbd "<return>") nil)
-  )
+    :ensure t
+    :config
+    (define-key mc/keymap (kbd "<return>") nil)
+    )
 
 ;; key bindings ---
 
