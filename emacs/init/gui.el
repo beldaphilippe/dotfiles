@@ -49,9 +49,12 @@
                           :height my/font-height)
       (set-face-attribute 'fixed-pitch nil
                           ;; :family "FiraCode Nerd Font Mono")
-                          :family "DejaVu Sans Code")
+                          :family "DejaVu Sans Code"
+                          :height 1.0)
       (set-face-attribute 'variable-pitch nil
-                          :family "Open Sans"))))
+                          :family "Open Sans"
+                          :height 1.05)
+      )))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'my/setup-fonts)
@@ -61,8 +64,11 @@
 (use-package mixed-pitch
   :ensure t
   :defer t
-  :hook ((org-mode   . mixed-pitch-mode)
-         (LaTeX-mode . mixed-pitch-mode)))
+  :hook ((org-mode      . mixed-pitch-mode)
+         (markdown-mode . mixed-pitch-mode)
+         (LaTeX-mode    . mixed-pitch-mode))
+  :config (setq mixed-pitch-set-height t)
+  )
 
 ;; ligatures (specific config for Fira Code/Cascadia Code)
 ;; https://github.com/mickeynp/ligature.el/wiki
@@ -143,12 +149,12 @@
 ;; add hook to resist theme change
 (add-hook 'after-init-hook
           (lambda ()
-;;             ;; (set-face-attribute 'line-number nil
-;;                                 ;; :background (face-attribute 'highlight :background nil t)
-;;                                 ;; :foreground (face-attribute 'font-lock-comment-face :foreground nil t))
+            ;;             ;; (set-face-attribute 'line-number nil
+            ;;                                 ;; :background (face-attribute 'highlight :background nil t)
+            ;;                                 ;; :foreground (face-attribute 'font-lock-comment-face :foreground nil t))
             (set-face-attribute 'line-number-current-line nil
-;;                                 ;; :background (face-attribute 'highlight :background nil t)
-;;                                 :foreground (face-attribute 'default :foreground nil t)
+                                ;;                                 ;; :background (face-attribute 'highlight :background nil t)
+                                ;;                                 :foreground (face-attribute 'default :foreground nil t)
                                 :weight 'bold)))
 (defun my/enable-line-numbers ()
   (setq-local display-line-numbers-type
