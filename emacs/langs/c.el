@@ -12,8 +12,8 @@
 ;;   :config (push 'company-rtags company-backends)
 ;;   )
 
-(setq-default c-basic-offset 4)
-(setq-default c-ts-mode-indent-offset 4)
+(setq-default c-basic-offset 2)
+(setq-default c-ts-mode-indent-offset 2)
 
 ;; (use-package c-ts-mode
 ;;   :defer t
