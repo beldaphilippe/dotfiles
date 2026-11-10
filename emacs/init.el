@@ -35,6 +35,7 @@
   '("utils.el"
 
     "c.el"
+    "csv.el"
     "cpp.el"
     "docker.el"
     "git.el"
