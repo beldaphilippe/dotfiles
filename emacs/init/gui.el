@@ -152,7 +152,9 @@
             ;;             ;; (set-face-attribute 'line-number nil
             ;;                                 ;; :background (face-attribute 'highlight :background nil t)
             ;;                                 ;; :foreground (face-attribute 'font-lock-comment-face :foreground nil t))
+            (set-face-attribute 'line-number nil :inherit 'default)
             (set-face-attribute 'line-number-current-line nil
+                                :inherit 'line-number
                                 ;;                                 ;; :background (face-attribute 'highlight :background nil t)
                                 ;;                                 :foreground (face-attribute 'default :foreground nil t)
                                 :weight 'bold)))
