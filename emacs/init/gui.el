@@ -146,23 +146,23 @@
 ;; line numbers ---
 ;; display lines numbers (relative for vim bindings and absolute for emacs bindings)
 (setq-default display-line-numbers-width 3) ;; default line number width to 3 to avoid jumping
+
 ;; add hook to resist theme change
-(add-hook 'after-init-hook
-          (lambda ()
-            ;;             ;; (set-face-attribute 'line-number nil
-            ;;                                 ;; :background (face-attribute 'highlight :background nil t)
-            ;;                                 ;; :foreground (face-attribute 'font-lock-comment-face :foreground nil t))
-            (set-face-attribute 'line-number nil :inherit 'default)
-            (set-face-attribute 'line-number-current-line nil
-                                :inherit 'line-number
-                                ;;                                 ;; :background (face-attribute 'highlight :background nil t)
-                                ;;                                 :foreground (face-attribute 'default :foreground nil t)
-                                :weight 'bold)))
 (defun my/enable-line-numbers ()
   (setq-local display-line-numbers-type
               (if (bound-and-true-p evil-mode) 'relative 'absolute))
   (display-line-numbers-mode 1))
 (add-hook 'prog-mode-hook #'my/enable-line-numbers)
+
+
+(defun my/fix-line-number-faces (&optional _frame)
+  (set-face-attribute 'line-number nil :inherit 'default)
+  (set-face-attribute 'line-number-current-line nil
+                      :inherit 'line-number
+                      :weight 'bold))
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook #'my/fix-line-number-faces)
+  (add-hook 'after-init-hook #'my/fix-line-number-faces))
 
 ;; themes ---
 
